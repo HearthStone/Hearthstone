@@ -518,9 +518,6 @@ void ArathiBasin::EventUpdateResources(uint32 Team)
 		sEventMgr.AddEvent(TO_CBATTLEGROUND(this), &CBattleground::Close, EVENT_BATTLEGROUND_CLOSE, 120000, 1,0);
 		SendChatMessage( CHAT_MSG_BG_SYSTEM_NEUTRAL, 0, "|cffffff00This battleground will close in 2 minutes.");
 
-		/* add the marks of honor to all players */
-		SpellEntry * winner_spell = dbcSpell.LookupEntry(24953);
-		SpellEntry * loser_spell = dbcSpell.LookupEntry(24952);
 		for(uint32 i = 0; i < 2; i++)
 		{
 			for(set<Player*  >::iterator itr = m_players[i].begin(); itr != m_players[i].end(); itr++)
@@ -532,7 +529,6 @@ void ArathiBasin::EventUpdateResources(uint32 Team)
 
 				if(i == m_losingteam)
 				{
-					(*itr)->CastSpell((*itr), loser_spell, true);
 					(*itr)->m_bgScore.BonusHonor += m_bonusHonor;
 					HonorHandler::AddHonorPointsToPlayer((*itr), m_bonusHonor);
 					if((*itr)->fromrandombg)
@@ -544,7 +540,6 @@ void ArathiBasin::EventUpdateResources(uint32 Team)
 				}
 				else
 				{
-					(*itr)->CastSpell((*itr), winner_spell, true);
 					(*itr)->m_bgScore.BonusHonor += 2*m_bonusHonor;
 					HonorHandler::AddHonorPointsToPlayer((*itr), 2*m_bonusHonor);
 					uint32 diff = abs((int32)(m_resources[i] - m_resources[i ? 0 : 1]));

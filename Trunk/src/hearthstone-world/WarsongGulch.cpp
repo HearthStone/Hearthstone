@@ -188,9 +188,6 @@ void WarsongGulch::HookOnAreaTrigger(Player* plr, uint32 id)
 			SendChatMessage( CHAT_MSG_BG_SYSTEM_NEUTRAL, 0, "|cffffff00This battleground will close in 2 minutes.");
 
 			m_mainLock.Acquire();
-			/* add the marks of honor to all players */
-			SpellEntry * winner_spell = dbcSpell.LookupEntry(24951);
-			SpellEntry * loser_spell = dbcSpell.LookupEntry(24950);
 			for(uint32 i = 0; i < 2; i++)
 			{
 				for(set<Player*  >::iterator itr = m_players[i].begin(); itr != m_players[i].end(); itr++)
@@ -204,7 +201,6 @@ void WarsongGulch::HookOnAreaTrigger(Player* plr, uint32 id)
 					{
 						(*itr)->m_bgScore.BonusHonor += m_CompleteHonor;
 						HonorHandler::AddHonorPointsToPlayer((*itr), m_CompleteHonor);
-						(*itr)->CastSpell((*itr), loser_spell, true);
 						if((*itr)->fromrandombg)
 						{
 							(*itr)->m_honorToday += (*itr)->GenerateRBGReward((*itr)->getLevel(),5);
@@ -216,7 +212,6 @@ void WarsongGulch::HookOnAreaTrigger(Player* plr, uint32 id)
 					{
 						(*itr)->m_bgScore.BonusHonor += m_CompleteHonor + m_WinHonor;
 						HonorHandler::AddHonorPointsToPlayer((*itr), m_CompleteHonor + m_WinHonor);
-						(*itr)->CastSpell((*itr), winner_spell, true);
 						uint32 diff = abs(int32(m_scores[i] - m_scores[i ? 0 : 1]));
 						(*itr)->GetAchievementInterface()->HandleAchievementCriteriaWinBattleground( m_mapMgr->GetMapId(), diff, ((uint32)UNIXTIME - m_startTime) / 1000, TO_CBATTLEGROUND(this));
 						if((*itr)->fromrandombg)
