@@ -1,0 +1,465 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{90297C34-F231-4DF4-848E-A74BCC0E40ED}</ProjectGuid>
+    <RootNamespace>hearthstone-shared</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\hearthstone-shared___Win32_Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\hearthstone-shared___Win32_Release\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\hearthstone-shared___x64_Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\hearthstone-shared___x64_Release\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\hearthstone-shared___Win32_Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\hearthstone-shared___Win32_Debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\hearthstone-shared___x64_Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\hearthstone-shared___x64_Debug\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\src\hearthstone-shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SHARED_LIB_BUILDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;SHARED_LIB_BUILDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>$(IntDir)hearthstone-shared.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\src\hearthstone-shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_HAS_ITERATOR_DEBUGGING=0;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_WIN64;SHARED_LIB_BUILDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;SHARED_LIB_BUILDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>$(IntDir)hearthstone-shared.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\src\hearthstone-shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;SHARED_LIB_BUILDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;SHARED_LIB_BUILDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>$(IntDir)hearthstone-shared.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\src\hearthstone-shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_WIN64;SHARED_LIB_BUILDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;SHARED_LIB_BUILDER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Lib>
+      <OutputFile>$(IntDir)hearthstone-shared.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Lib>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\hearthstone-shared\Auth\RSA.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Console\CConsole.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Config\Config.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Auth\BigNumber.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\crc32.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\DataStorage\Database.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\DataStorage\DatabaseEngine.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\DataStorage\DBC\DBC.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\DataStorage\DBC\dbcfile.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\DataStorage\DBC\DBCStores.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\hashmap.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Auth\HMAC.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Auth\MD5.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Auth\Sha1.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Auth\WowCrypt.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Network\SocketEngine.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Network\SocketEngine_iocp.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Network\TcpSocket.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourCommon.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourNavMesh.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourNavMeshBuilder.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourNavMeshQuery.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourNode.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourObstacleAvoidance.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Recast\Recast.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Recast\RecastArea.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Recast\RecastContour.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Recast\RecastFilter.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Recast\RecastMesh.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Recast\RecastMeshDetail.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Recast\RecastRasterization.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Pathfinding\Recast\RecastRegion.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Threading\Mutex.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Threading\ThreadPool.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\CallBack.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\CrashHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\hearthstone_getopt.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\MemoryLeaks.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\MersenneTwister.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\StackWalker.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Util.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Log.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\Interface.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\vmap\BIH.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\vmap\MapTree.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\vmap\ModelInstance.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\vmap\TileAssembler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\vmap\VMapFactory.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\vmap\VMapManager2.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\vmap\WorldModel.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\g3dfnmatch.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\g3dmath.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\AABox.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Box.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Capsule.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\CollisionDetection.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\CoordinateFrame.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Crypto.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Cylinder.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\fileutils.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Line.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\LineSegment.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\MemoryManager.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Plane.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Quat.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Random.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Ray.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\ReferenceCount.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\RegistryUtil.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Sphere.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\stringutils.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\System.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Triangle.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\uint128.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\UprightFrame.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector2.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector2int16.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector3.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector3int16.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector3int32.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector4.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector4int8.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Matrix.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Matrix3.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-shared\Collision\g3dlite\Matrix4.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\hearthstone-shared\Auth\RSA.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\ByteConverter.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Console\BaseConsole.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Console\CConsole.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Config\Config.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Config\ConfigEnv.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Auth\BigNumber.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\crc32.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\DataStorage\Database.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\DataStorage\DatabaseEngine.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\DataStorage\DatabaseEnv.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\DataStorage\DBC\DataStore.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\DataStorage\DBC\DBC.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\DataStorage\DBC\dbcfile.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\DataStorage\DBC\DBCStores.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\DataStorage\Field.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\hashmap.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Auth\HMAC.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Auth\MD5.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Auth\Sha1.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Auth\WowCrypt.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\int24.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Network\BaseBuffer.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Network\BaseSocket.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Network\CircularBuffer.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Network\ListenSocket.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Network\Network.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Network\SocketEngine.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Network\SocketEngine_iocp.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Network\StraightBuffer.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Network\TcpSocket.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourCommon.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourNavMesh.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourNavMeshBuilder.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourNavMeshQuery.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourNode.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Pathfinding\Detour\DetourObstacleAvoidance.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Pathfinding\Recast\Recast.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\PerfCounters.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\svn_revision.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Threading\Condition.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Threading\Guard.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Threading\LockedQueue.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Threading\Mutex.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Threading\Queue.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Threading\RWLock.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Threading\Threading.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Threading\ThreadStarter.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Threading\ThreadPool.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\ByteBuffer.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\CallBack.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\CrashHandler.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Errors.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\hearthstone_getopt.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\LocationVector.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\MemoryLeaks.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\MersenneTwister.h" />
+    <ClInclude Include="..\..\src\logonserver\PeriodicFunctionCall_Thread.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\PreallocatedQueue.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Singleton.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\StackBuffer.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\StackWalker.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Timer.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Util.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\WoWGuid.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Log.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\NGLog.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\LocationVector.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\vmap\BIH.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\vmap\MapTree.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\vmap\ModelInstance.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\vmap\TileAssembler.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\vmap\VMapDefinitions.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\vmap\VMapFactory.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\vmap\VMapManager2.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\vmap\VMapTools.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\vmap\WorldModel.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\G3D.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\G3DAll.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\g3dfnmatch.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\G3DGameUnits.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\g3dmath.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\AABox.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Array.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\AtomicInt32.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\BoundsTrait.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Box.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Capsule.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\CollisionDetection.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\CoordinateFrame.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Crypto.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Cylinder.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\EqualsTrait.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\fileutils.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\GCamera.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\HashTrait.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Line.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\LineSegment.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\MemoryManager.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Plane.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\platform.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\PositionTrait.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Quat.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Random.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Ray.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Rect2D.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\ReferenceCount.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\RegistryUtil.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Set.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Sphere.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Spline.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\stringutils.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\System.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Table.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Triangle.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\uint128.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\units.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\UprightFrame.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector2.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector2int16.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector3.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector3int16.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector3int32.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector4.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Vector4int8.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\vectorMath.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Matrix.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Matrix2.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Matrix3.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Collision\g3dlite\Matrix4.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\AuthCodes.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Common.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\FastQueue.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\format.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\hearthstoneConfig.h" />
+    <ClInclude Include="..\..\src\hearthstone-shared\Storage.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

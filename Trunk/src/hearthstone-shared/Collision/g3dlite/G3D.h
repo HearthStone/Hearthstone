@@ -1,0 +1,60 @@
+/***
+ * Demonstrike Core
+ */
+
+#pragma once
+
+#include "platform.h"
+#include "units.h"
+#include "Random.h"
+#include "Array.h"
+#include "Crypto.h"
+#include "format.h"
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
+#include "Matrix.h"
+#include "Matrix2.h"
+#include "Matrix3.h"
+#include "Matrix4.h"
+#include "CoordinateFrame.h"
+#include "Plane.h"
+#include "Line.h"
+#include "Ray.h"
+#include "Sphere.h"
+#include "Box.h"
+#include "AABox.h"
+#include "Quat.h"
+#include "stringutils.h"
+#include "Table.h"
+#include "Set.h"
+#include "g3dfnmatch.h"
+#include "G3DGameUnits.h"
+#include "g3dmath.h"
+#include "uint128.h"
+#include "fileutils.h"
+#include "ReferenceCount.h"
+#include "MemoryManager.h"
+
+template<class T> struct HashTrait< G3D::ReferenceCountedPointer<T> > {
+	static size_t hashCode(G3D::ReferenceCountedPointer<T> key) { return reinterpret_cast<size_t>( key.pointer() ); }
+};
+
+#include "CollisionDetection.h"
+#include "System.h"
+#include "Spline.h"
+#include "UprightFrame.h"
+#include "LineSegment.h"
+#include "Capsule.h"
+#include "Cylinder.h"
+#include "Triangle.h"
+#include "Vector2int16.h"
+#include "Vector3int16.h"
+#include "Vector3int32.h"
+#include "Vector4int8.h"
+#include "vectorMath.h"
+#include "Rect2D.h"
+#include "GCamera.h"
+#include "AtomicInt32.h"
+#include "RegistryUtil.h"
+#include "filter.h"

@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="WS Interface">
+      <UniqueIdentifier>{a437dd93-5b1b-4f0a-bc31-129f918bf22c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client Handlers">
+      <UniqueIdentifier>{23e6c7fb-ef85-4cd2-9ff0-161a55c0ad9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Caching">
+      <UniqueIdentifier>{13d74252-de1c-4bae-9822-e34b1c8e6964}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Console">
+      <UniqueIdentifier>{740eedce-cdef-4a22-a8b2-7a8704fcc4cd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\hearthstone-logonserver\LogonCommServer.cpp">
+      <Filter>WS Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-logonserver\LogonOpcodes.cpp">
+      <Filter>WS Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-logonserver\AuthSocket.cpp">
+      <Filter>Client Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-logonserver\AutoPatcher.cpp">
+      <Filter>Client Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-logonserver\AccountCache.cpp">
+      <Filter>Caching</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-logonserver\LogonConsole.cpp">
+      <Filter>Console</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-logonserver\LogonStdAfx.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-logonserver\Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\hearthstone-logonserver\LogonCommServer.h">
+      <Filter>WS Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-logonserver\LogonOpcodes.h">
+      <Filter>WS Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-logonserver\AuthSocket.h">
+      <Filter>Client Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-logonserver\AuthStructs.h">
+      <Filter>Client Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-logonserver\AutoPatcher.h">
+      <Filter>Client Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-logonserver\AccountCache.h">
+      <Filter>Caching</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-logonserver\LogonConsole.h">
+      <Filter>Console</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-logonserver\LogonStdAfx.h" />
+    <ClInclude Include="..\..\src\hearthstone-logonserver\Main.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\hearthstone-shared\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\src\hearthstone-shared\resources.rc" />
+  </ItemGroup>
+</Project>

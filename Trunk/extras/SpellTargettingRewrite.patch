@@ -1,0 +1,1936 @@
+Index: hearthstone-world/Object.cpp
+===================================================================
+--- hearthstone-world/Object.cpp	(revision 1484)
++++ hearthstone-world/Object.cpp	(working copy)
+@@ -2027,6 +2027,16 @@
+ 	return( dist <= range );
+ }
+ 
++bool Object::IsTotem()
++{
++	if( GetTypeId() != TYPEID_UNIT )
++		return false;
++
++	if( TO_UNIT(this)->IsTotem() )
++		return true;
++	return false;
++}
++
+ bool Object::IsPet()
+ {
+ 	if( GetTypeId() != TYPEID_UNIT )
+Index: hearthstone-world/Object.h
+===================================================================
+--- hearthstone-world/Object.h	(revision 1484)
++++ hearthstone-world/Object.h	(working copy)
+@@ -180,6 +180,7 @@
+ 	HEARTHSTONE_INLINE bool IsVehicle() { return m_isVehicle; }
+ 	HEARTHSTONE_INLINE bool IsGameObject() { return m_objectTypeId == TYPEID_GAMEOBJECT; }
+ 	HEARTHSTONE_INLINE bool IsItem()	{ return m_objectTypeId == TYPEID_ITEM; }
++	bool IsTotem();
+ 	bool IsPet();
+ 
+ 	//! This includes any nested objects we have, inventory for example.
+Index: hearthstone-world/Player.cpp
+===================================================================
+--- hearthstone-world/Player.cpp	(revision 1484)
++++ hearthstone-world/Player.cpp	(working copy)
+@@ -5216,7 +5216,6 @@
+ {
+ 	if(m_playerInfo->m_Group != NULL)
+ 		return m_playerInfo->m_Group->HasMember(plyr->m_playerInfo);
+-
+ 	return false;
+ }
+ 
+Index: hearthstone-world/Spell.h
+===================================================================
+--- hearthstone-world/Spell.h	(revision 1484)
++++ hearthstone-world/Spell.h	(working copy)
+@@ -1607,6 +1607,33 @@
+ 	return false;
+ }
+ 
++enum SpellImplicitTargetType
++{
++	SPELL_TARGET_NONE					= 0x00000000,
++    SPELL_TARGET_REQUIRE_GAMEOBJECT		= 0x00000001,
++    SPELL_TARGET_REQUIRE_ITEM			= 0x00000002,
++    SPELL_TARGET_REQUIRE_ATTACKABLE		= 0x00000004,
++    SPELL_TARGET_REQUIRE_FRIENDLY		= 0x00000008,
++    SPELL_TARGET_OBJECT_SCRIPTED		= 0x00000010, //scripted units
++    SPELL_TARGET_OBJECT_SELF			= 0x00000020,
++    SPELL_TARGET_OBJECT_CURPET			= 0x00000040,
++    SPELL_TARGET_OBJECT_CURCRITTER		= 0x00000080,
++    SPELL_TARGET_OBJECT_PETOWNER		= 0x00000100,
++    SPELL_TARGET_OBJECT_CURTOTEMS		= 0x00000200,
++    SPELL_TARGET_OBJECT_TARCLASS		= 0x00000400,
++    SPELL_TARGET_AREA					= 0x00000800,
++    SPELL_TARGET_AREA_SELF				= 0x00001000,
++    SPELL_TARGET_AREA_CONE				= 0x00002000,
++    SPELL_TARGET_AREA_CHAIN				= 0x00004000,
++    SPELL_TARGET_AREA_CURTARGET			= 0x00008000,
++    SPELL_TARGET_AREA_RANDOM			= 0x00010000,
++    SPELL_TARGET_AREA_PARTY				= 0x00020000,
++    SPELL_TARGET_AREA_RAID				= 0x00040000,
++    SPELL_TARGET_NOT_IMPLEMENTED		= 0x00080000,
++    SPELL_TARGET_NO_OBJECT				= 0x00100000,
++    SPELL_TARGET_ANY_OBJECT				= 0x00200000,
++};
++
+ typedef void(Spell::*pSpellEffect)(uint32 i);
+ typedef void(Spell::*pSpellTarget)(uint32 i, uint32 j);
+ 
+@@ -1657,6 +1684,7 @@
+ 	void FillAllFriendlyInArea(uint32 i, float srcx,float srcy,float srcz, float range);
+ 	// Fills the gameobject targets at the area of effect
+ 	void FillAllGameObjectTargetsInArea(uint32 i, float srcx,float srcy,float srcz, float range);
++
+ 	//get single Enemy as target
+ 	uint64 GetSinglePossibleEnemy(uint32 i, float prange=0);
+ 	//get single Enemy as target
+@@ -1695,6 +1723,8 @@
+ 	void DetermineSkillUp();
+ 	// Increases cast time of the spell
+ 	void AddTime(uint32 type);
++	// Get Target Type
++	uint32 GetTargetType(uint32 implicittarget, uint32 i);
+ 	void AddCooldown();
+ 	void AddStartCooldown();
+ 	void HandleDestLocationHit();
+@@ -1876,61 +1906,15 @@
+ 	void SpellEffectApplyDemonAura(uint32 i);
+ 	void SpellEffectRemoveAura(uint32 i);
+ 
+-	// Spell Targets Handlers
+-	void SpellTargetNULL(uint32 i, uint32 j);
+-	void SpellTargetDefault(uint32 i, uint32 j);
+-	void SpellTargetSelf(uint32 i, uint32 j);
+-	void SpellTargetInvisibleAOE(uint32 i, uint32 j);
+-	void SpellTargetFriendly(uint32 i, uint32 j);
+-	void SpellTargetPet(uint32 i, uint32 j);
+-	void SpellTargetSingleTargetEnemy(uint32 i, uint32 j);
+-	void SpellTargetCustomAreaOfEffect(uint32 i, uint32 j);
+-	void SpellTargetAreaOfEffect(uint32 i, uint32 j);
+-	void SpellTargetLandUnderCaster(uint32 i, uint32 j);	/// I don't think this is the correct name for this one
+-	void SpellTargetAllPartyMembersRangeNR(uint32 i, uint32 j);
+-	void SpellTargetSingleTargetFriend(uint32 i, uint32 j);
+-	void SpellTargetAoE(uint32 i, uint32 j);	// something special
+-	void SpellTargetSingleGameobjectTarget(uint32 i, uint32 j);
+-	void SpellTargetInFrontOfCaster(uint32 i, uint32 j);
+-	void SpellTargetSingleFriend(uint32 i, uint32 j);
+-	void SpellTargetGameobject_itemTarget(uint32 i, uint32 j);
+-	void SpellTargetPetOwner(uint32 i, uint32 j);
+-	void SpellTargetEnemysAreaOfEffect(uint32 i, uint32 j);
+-	void SpellTargetTypeTAOE(uint32 i, uint32 j);
+-	void SpellTargetAllyBasedAreaEffect(uint32 i, uint32 j);
+-	void SpellTargetScriptedEffects(uint32 i, uint32 j);
+-	void SpellTargetSummon(uint32 i, uint32 j);
+-	void SpellTargetNearbyPartyMembers(uint32 i, uint32 j);
+-	void SpellTargetSingleTargetPartyMember(uint32 i, uint32 j);
+-	void SpellTargetScriptedEffects2(uint32 i, uint32 j);
+-	void SpellTargetPartyMember(uint32 i, uint32 j);
+-	void SpellTargetDummyTarget(uint32 i, uint32 j);
+-	void SpellTargetFishing(uint32 i, uint32 j);
+-	void SpellTargetType40(uint32 i, uint32 j);
+-	void SpellTargetTotem(uint32 i, uint32 j);
+-	void SpellTargetChainTargeting(uint32 i, uint32 j);
+-	void SpellTargetGameObjectsInByCasterPos(uint32 i, uint32 j);
+-	void SpellTargetGameObjectsInArea(uint32 i, uint32 j);
+-	void SpellTargetSimpleTargetAdd(uint32 i, uint32 j);
+-	void SpellTarget56(uint32 o, uint32 j);
+-	void SpellTargetTargetAreaSelectedUnit(uint32 i, uint32 j);
+-	void SpellTargetInFrontOfCaster2(uint32 i, uint32 j);
+-	void SpellTargetTargetPartyMember(uint32 i, uint32 j);
+-	void SpellTargetSameGroupSameClass(uint32 i, uint32 j);
+-	void SpellTargetPositionOfTarget(uint32 i, uint32 j);
+-	void SpellTargetAreaOfEffect87(uint32 i, uint32 j);
+-	void SpellTargetProjectile(uint32 i, uint32 j);
+-	void SpellTargetAllTargetsInArea(uint32 i, uint32 j);
+-	void SpellTargetVehicle(uint32 i, uint32 j);
+-	void SpellTargetVehicleDriver(uint32 i, uint32 j);
+-	void SpellTargetVehiclePassenger(uint32 i, uint32 j);
+-	void SpellTargetVehiclePassenger1(uint32 i, uint32 j);
+-	void SpellTargetVehiclePassenger2(uint32 i, uint32 j);
+-	void SpellTargetVehiclePassenger3(uint32 i, uint32 j);
+-	void SpellTargetVehiclePassenger4(uint32 i, uint32 j);
+-	void SpellTargetVehiclePassenger5(uint32 i, uint32 j);
+-	void SpellTargetVehiclePassenger6(uint32 i, uint32 j);
+-	void SpellTargetVehiclePassenger7(uint32 i, uint32 j);
++	// Spell Targets
++	void HandleTargetNoObject();
++	bool AddTarget(uint32 i, uint32 TargetType, Object* obj);
++	void AddAOETargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets);
++	void AddPartyTargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets);
++	void AddRaidTargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets, bool partylimit = false);
++	void AddChainTargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets);
++	void AddConeTargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets);
++	void AddScriptedOrSpellFocusTargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets);
+ 
+ 	uint64 static FindLowestHealthRaidMember(Player* Target, uint32 dist);
+ 
+@@ -2264,18 +2248,24 @@
+ 	std::vector<uint64> m_orderedObjects;
+ };
+ 
++extern uint32 implicitTargetFlags[150];
++
+ void ApplyDiminishingReturnTimer(int32 * Duration, Unit* Target, SpellEntry * spell);
+ void UnapplyDiminishingReturnTimer(Unit* Target, SpellEntry * spell);
+ uint32 GetDiminishingGroup(uint32 NameHash);
++
+ uint32 GetTriggerSpellFromDescription(std::string delimiter, std::string desc);
+ SpellEntry* CreateDummySpell(uint32 id);
+ uint32 GetSpellClass(SpellEntry *sp);
+ uint32 fill( uint32* arr, ... );
++
+ void GenerateNameHashesFile();
+ void GenerateSpellCoeffFile();
++
+ void CopyEffect(SpellEntry *fromSpell, uint8 fromEffect, SpellEntry *toSpell, uint8 toEffect);
+ void ApplySingleSpellFixes(SpellEntry *sp);
+ void ApplyCoeffSpellFixes(SpellEntry *sp);
+ void SetProcFlags(SpellEntry *sp);
++void SetupSpellTargets();
+ 
+ #endif
+Index: hearthstone-world/SpellEffects.cpp
+===================================================================
+--- hearthstone-world/SpellEffects.cpp	(revision 1484)
++++ hearthstone-world/SpellEffects.cpp	(working copy)
+@@ -435,8 +435,6 @@
+ 
+ 			if(reduce && chaindamage)
+ 			{
+-				if(GetSpellProto()->SpellGroupType && u_caster)
+-					SM_FIValue(u_caster->SM[SMT_JUMP_REDUCE][1], &reduce, GetSpellProto()->SpellGroupType);
+ 				chaindamage = chaindamage * reduce / 100;
+ 			}
+ 		}
+@@ -1142,16 +1140,10 @@
+ 				}
+ 
+ 				// Do holy damage
+-				if(p_caster->DuelingWith != NULL && p_caster->DuelingWith == unitTarget)
++				if(isAttackable(p_caster, unitTarget))
+ 					p_caster->CastSpell(unitTarget, hostileSpell, true);
+-				else if(p_caster->DuelingWith != NULL && unitTarget->IsPet() && (p_caster->DuelingWith == (TO_PET(unitTarget)->GetOwner())))
+-					p_caster->CastSpell(unitTarget, hostileSpell, true);
+-				else if(isHostile(p_caster, unitTarget))
+-					p_caster->CastSpell(unitTarget, hostileSpell, true);
+-				else if(isCombatSupport(p_caster, unitTarget))
++				else
+ 					p_caster->CastSpell(unitTarget, friendlySpell, true);
+-				else
+-					p_caster->CastSpell(p_caster, friendlySpell, true);
+ 			}
+ 		}break;
+ 
+@@ -1192,6 +1184,7 @@
+ 						friendlySpell[1] = 52988;
+ 						break;
+ 				}
++
+ 				if( isAttackable(p_caster, unitTarget) ) // Do holy damage
+ 				{
+ 					// First tick is instant.
+@@ -1667,10 +1660,10 @@
+ 				targets[i]->GetAIInterface()->SetNextTarget(u_caster);
+ 			}
+ 		}break;
++
+ 	/*
+ 		Divine Storm
+ 	*/
+-
+ 	case 53385:
+ 		{
+ 			if( p_caster != NULL && m_targetList.size())
+@@ -1799,6 +1792,29 @@
+ 			}
+ 		}break;
+ 	/*************************
++	 * PRIEST SPELLS
++	 *************************/
++	case 15237:
++	case 15430:
++	case 15431:
++	case 25331:
++	case 27799:
++	case 27800:
++	case 27801:
++	case 48077:
++	case 48078:
++		{
++			uint32 hostileSpell = GetSpellProto()->EffectTriggerSpell[0];
++			uint32 friendlySpell = GetSpellProto()->EffectTriggerSpell[1];
++
++			// Do holy damage
++			if(isAttackable(m_caster, unitTarget))
++				m_caster->CastSpell(unitTarget, hostileSpell, true);
++			else
++				m_caster->CastSpell(unitTarget, friendlySpell, true);
++		}break;
++
++	/*************************
+ 	 * DEATH KNIGHT SPELLS
+ 	 *************************/
+ 	case 52375: // Old Death Coil
+@@ -3042,10 +3058,6 @@
+ 		else
+ 		{
+ 			int32 reduce = (int32)(GetSpellProto()->dmg_multiplier[i] * 100.0f);
+-			if(GetSpellProto()->SpellGroupType && u_caster)
+-			{
+-				SM_FIValue(u_caster->SM[SMT_JUMP_REDUCE][1],&reduce,GetSpellProto()->SpellGroupType);
+-			}
+ 			chaindamage -= (reduce * chaindamage) / 100;
+ 			Heal((int32)chaindamage);
+ 		}
+Index: hearthstone-world/Spellfixes/SingleSpellFixes.cpp
+===================================================================
+--- hearthstone-world/Spellfixes/SingleSpellFixes.cpp	(revision 1484)
++++ hearthstone-world/Spellfixes/SingleSpellFixes.cpp	(working copy)
+@@ -441,48 +441,56 @@
+ 		//Priest - Holy	Nova
+ 	case 15237:
+ 		{
+-			sp->Effect[1]	=	SPELL_EFFECT_TRIGGER_SPELL;
+-			sp->EffectTriggerSpell[1]	=	23455;
++			sp->Effect[0] = sp->Effect[1] = SPELL_EFFECT_DUMMY;
++			sp->EffectTriggerSpell[1] = 23455;
+ 		}break;
++
+ 	case 15430:
+ 		{
+-			sp->Effect[1]	=	SPELL_EFFECT_TRIGGER_SPELL;
+-			sp->EffectTriggerSpell[1]	=	23458;
++			sp->Effect[0] = sp->Effect[1] = SPELL_EFFECT_DUMMY;
++			sp->EffectTriggerSpell[1] = 23458;
+ 		}break;
++
+ 	case 15431:
+ 		{
+-			sp->Effect[1]	=	SPELL_EFFECT_TRIGGER_SPELL;
+-			sp->EffectTriggerSpell[1]	=	23459;
++			sp->Effect[0] = sp->Effect[1] = SPELL_EFFECT_DUMMY;
++			sp->EffectTriggerSpell[1] = 23459;
+ 		}break;
++
++	case 25331:
++		{
++			sp->Effect[0] = sp->Effect[1] = SPELL_EFFECT_DUMMY;
++			sp->EffectTriggerSpell[1] = 27803;
++		}break;
++
+ 	case 27799:
+ 		{
+-			sp->Effect[1]	=	SPELL_EFFECT_TRIGGER_SPELL;
+-			sp->EffectTriggerSpell[1]	=	27803;
++			sp->Effect[0] = sp->Effect[1] = SPELL_EFFECT_DUMMY;
++			sp->EffectTriggerSpell[1] = 27804;
+ 		}break;
++
+ 	case 27800:
+ 		{
+-			sp->Effect[1]	=	SPELL_EFFECT_TRIGGER_SPELL;
+-			sp->EffectTriggerSpell[1]	=	27804;
++			sp->Effect[0] = sp->Effect[1] = SPELL_EFFECT_DUMMY;
++			sp->EffectTriggerSpell[1] = 27805;
+ 		}break;
++
+ 	case 27801:
+ 		{
+-			sp->Effect[1]	=	SPELL_EFFECT_TRIGGER_SPELL;
+-			sp->EffectTriggerSpell[1]	=	27805;
++			sp->Effect[0] = sp->Effect[1] = SPELL_EFFECT_DUMMY;
++			sp->EffectTriggerSpell[1] = 25329;
+ 		}break;
+-	case 25331:
+-			{
+-			sp->Effect[1]	=	SPELL_EFFECT_TRIGGER_SPELL;
+-			sp->EffectTriggerSpell[1]	=	25329;
+-			}break;
++
+ 	case 48077:
+-			{
+-			sp->Effect[1]	=	SPELL_EFFECT_TRIGGER_SPELL;
+-			sp->EffectTriggerSpell[1]	=	48075;
+-			}break;
++		{
++			sp->Effect[0] = sp->Effect[1] = SPELL_EFFECT_DUMMY;
++			sp->EffectTriggerSpell[1] = 48075;
++		}break;
++
+ 	case 48078:
+ 		{
+-			sp->Effect[1]	=	SPELL_EFFECT_TRIGGER_SPELL;
+-			sp->EffectTriggerSpell[1]	=	48076;
++			sp->Effect[0] = sp->Effect[1] = SPELL_EFFECT_DUMMY;
++			sp->EffectTriggerSpell[1] = 48076;
+ 		}break;
+ 
+ 		// Moroes' garrote targets a single	enemy	instead	of us
+@@ -3368,6 +3376,8 @@
+ 		// Divine Storm
+ 	case 53385:
+ 		{
++			sp->Effect[0] = 0;
++			sp->Effect[1] = SPELL_EFFECT_DUMMY;
+ 			sp->AllowBackAttack = true;
+ 		}break;
+ 
+Index: hearthstone-world/Spellfixes/SpellFixes.cpp
+===================================================================
+--- hearthstone-world/Spellfixes/SpellFixes.cpp	(revision 1484)
++++ hearthstone-world/Spellfixes/SpellFixes.cpp	(working copy)
+@@ -752,6 +752,9 @@
+ 		ApplyCoeffSpellFixes(sp);
+ 	}
+ 
++	Log.Notice("World", "Setting target flags...");
++	SetupSpellTargets();
++
+ 	Log.Notice("World", "Processing %u dummy spells...", DummySpells.size());
+ 	set<uint32>::iterator itr = DummySpells.begin();
+ 	if(itr != DummySpells.end())
+@@ -1259,6 +1262,75 @@
+ 	sp->NameHash = crc32((const unsigned char*)sp->Name, (unsigned int)strlen(sp->Name)); //need these set before we start processing spells
+ }
+ 
++extern uint32 implicitTargetFlags[150];
++
++void SetupSpellTargets()
++{
++	memset(implicitTargetFlags, SPELL_TARGET_NONE, sizeof(uint32)*150);
++
++	implicitTargetFlags[0] = (SPELL_TARGET_REQUIRE_ITEM | SPELL_TARGET_REQUIRE_GAMEOBJECT);
++	implicitTargetFlags[1] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[3] = (SPELL_TARGET_REQUIRE_FRIENDLY);
++	implicitTargetFlags[4] = (SPELL_TARGET_AREA_SELF | SPELL_TARGET_REQUIRE_FRIENDLY);
++	implicitTargetFlags[5] = (SPELL_TARGET_OBJECT_CURPET);
++	implicitTargetFlags[6] = (SPELL_TARGET_REQUIRE_ATTACKABLE);
++	implicitTargetFlags[7] = (SPELL_TARGET_OBJECT_SCRIPTED);
++	implicitTargetFlags[8] = (SPELL_TARGET_AREA | SPELL_TARGET_REQUIRE_ATTACKABLE);
++	implicitTargetFlags[15] = (SPELL_TARGET_AREA_SELF | SPELL_TARGET_REQUIRE_ATTACKABLE);
++	implicitTargetFlags[16] = (SPELL_TARGET_AREA | SPELL_TARGET_REQUIRE_ATTACKABLE);
++	//implicitTargetFlags[17] = (SPELL_TARGET_AREA);
++	implicitTargetFlags[18] = (SPELL_TARGET_AREA_SELF | SPELL_TARGET_NO_OBJECT);
++	implicitTargetFlags[20] = (SPELL_TARGET_AREA_PARTY);
++	implicitTargetFlags[21] = (SPELL_TARGET_REQUIRE_FRIENDLY);
++	implicitTargetFlags[22] = (SPELL_TARGET_AREA_SELF);
++	implicitTargetFlags[23] = (SPELL_TARGET_REQUIRE_GAMEOBJECT);
++	implicitTargetFlags[24] = (SPELL_TARGET_AREA_CONE | SPELL_TARGET_REQUIRE_ATTACKABLE);
++	implicitTargetFlags[25] = (SPELL_TARGET_ANY_OBJECT);
++	implicitTargetFlags[26] = (SPELL_TARGET_REQUIRE_GAMEOBJECT | SPELL_TARGET_REQUIRE_ITEM);
++	implicitTargetFlags[27] = (SPELL_TARGET_OBJECT_PETOWNER);
++	implicitTargetFlags[28] = (SPELL_TARGET_AREA | SPELL_TARGET_REQUIRE_ATTACKABLE);
++	implicitTargetFlags[29] = (SPELL_TARGET_OBJECT_SELF | SPELL_TARGET_AREA_PARTY | SPELL_TARGET_AREA_SELF);
++	implicitTargetFlags[30] = (SPELL_TARGET_REQUIRE_FRIENDLY);
++	implicitTargetFlags[31] = (SPELL_TARGET_REQUIRE_FRIENDLY | SPELL_TARGET_AREA);
++	//implicitTargetFlags[32] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[33] = (SPELL_TARGET_AREA_SELF | SPELL_TARGET_AREA_PARTY);
++	implicitTargetFlags[35] = (SPELL_TARGET_AREA_PARTY);
++	implicitTargetFlags[36] = (SPELL_TARGET_OBJECT_SCRIPTED);
++	implicitTargetFlags[37] = (SPELL_TARGET_AREA_SELF | SPELL_TARGET_AREA_PARTY | SPELL_TARGET_AREA_RAID);
++	implicitTargetFlags[39] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[40] = (SPELL_TARGET_OBJECT_SCRIPTED);
++	implicitTargetFlags[41] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[42] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[43] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[44] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[45] = (SPELL_TARGET_AREA_CHAIN | SPELL_TARGET_REQUIRE_FRIENDLY);
++	implicitTargetFlags[46] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[47] = (SPELL_TARGET_AREA_SELF | SPELL_TARGET_NO_OBJECT); //dont fill target map for this (fucks up some spell visuals)
++	implicitTargetFlags[48] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[49] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[50] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[34] = (SPELL_TARGET_NOT_IMPLEMENTED); //seige stuff
++	implicitTargetFlags[53] = (SPELL_TARGET_AREA_CURTARGET | SPELL_TARGET_REQUIRE_ATTACKABLE);
++	implicitTargetFlags[54] = (SPELL_TARGET_AREA_CONE | SPELL_TARGET_REQUIRE_ATTACKABLE);
++	implicitTargetFlags[56] = (SPELL_TARGET_AREA_SELF | SPELL_TARGET_AREA_RAID); //used by commanding shout] = (targets raid now
++	implicitTargetFlags[57] = (SPELL_TARGET_REQUIRE_FRIENDLY | SPELL_TARGET_AREA_PARTY);
++	implicitTargetFlags[61] = (SPELL_TARGET_AREA_SELF | SPELL_TARGET_AREA_RAID | SPELL_TARGET_OBJECT_TARCLASS | SPELL_TARGET_REQUIRE_FRIENDLY);
++	implicitTargetFlags[63] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[64] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[65] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[66] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[67] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[69] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[72] = (SPELL_TARGET_AREA_RANDOM);
++	implicitTargetFlags[73] = (SPELL_TARGET_OBJECT_SELF);
++	implicitTargetFlags[76] = (SPELL_TARGET_REQUIRE_ATTACKABLE);
++	implicitTargetFlags[77] = (SPELL_TARGET_REQUIRE_ATTACKABLE);
++	implicitTargetFlags[86] = (SPELL_TARGET_AREA_RANDOM);
++	implicitTargetFlags[87] = (SPELL_TARGET_AREA);
++	implicitTargetFlags[90] = (SPELL_TARGET_OBJECT_CURCRITTER);
++	implicitTargetFlags[104] = (SPELL_TARGET_REQUIRE_ATTACKABLE | SPELL_TARGET_AREA_CONE);
++}
++
+ void GenerateSpellCoeffFile()
+ {
+ 	SpellEntry *sp;
+Index: hearthstone-world/SpellTarget.cpp
+===================================================================
+--- hearthstone-world/SpellTarget.cpp	(revision 1484)
++++ hearthstone-world/SpellTarget.cpp	(working copy)
+@@ -19,972 +19,426 @@
+ 
+ #include "StdAfx.h"
+ 
+-/// Function pointer holder
+-pSpellTarget SpellTargetHandler[TOTAL_SPELL_TARGET] =
++uint32 implicitTargetFlags[150];
++
++uint32 Spell::GetTargetType(uint32 implicittarget, uint32 i)
+ {
+-	&Spell::SpellTargetDefault,						// 0
+-	&Spell::SpellTargetSelf,						// 1
+-	&Spell::SpellTargetNULL,						// 2 Not handled (Test spells)
+-	&Spell::SpellTargetInvisibleAOE,				// 3
+-	&Spell::SpellTargetFriendly,					// 4
+-	&Spell::SpellTargetPet,							// 5
+-	&Spell::SpellTargetSingleTargetEnemy,			// 6
+-	&Spell::SpellTargetNULL,						// 7
+-	&Spell::SpellTargetCustomAreaOfEffect,			// 8
+-	&Spell::SpellTargetNULL,						// 9 Not handled (no spells)
+-	&Spell::SpellTargetNULL,						// 10 Not handled (no spells)
+-	&Spell::SpellTargetNULL,						// 11 Not handled (Test spells)
+-	&Spell::SpellTargetNULL,						// 12 Not handled (no spells)
+-	&Spell::SpellTargetNULL,						// 13 Not handled (no spells)
+-	&Spell::SpellTargetNULL,						// 14 Not handled (no spells)
+-	&Spell::SpellTargetAreaOfEffect,				// 15
+-	&Spell::SpellTargetAreaOfEffect,				// 16
+-	&Spell::SpellTargetNULL,						// 17 Target is a location
+-	&Spell::SpellTargetLandUnderCaster,				// 18
+-	&Spell::SpellTargetNULL,						// 19 Not handled (Test spells)
+-	&Spell::SpellTargetAllPartyMembersRangeNR,		// 20
+-	&Spell::SpellTargetSingleTargetFriend,			// 21
+-	&Spell::SpellTargetAoE,							// 22
+-	&Spell::SpellTargetSingleGameobjectTarget,		// 23
+-	&Spell::SpellTargetInFrontOfCaster,				// 24
+-	&Spell::SpellTargetSingleFriend,				// 25
+-	&Spell::SpellTargetGameobject_itemTarget,		// 26
+-	&Spell::SpellTargetPetOwner,					// 27
+-	&Spell::SpellTargetEnemysAreaOfEffect,			// 28 channeled
+-	&Spell::SpellTargetTypeTAOE,					// 29
+-	&Spell::SpellTargetAllyBasedAreaEffect,			// 30
+-	&Spell::SpellTargetScriptedEffects,				// 31
+-	&Spell::SpellTargetSummon,						// 32
+-	&Spell::SpellTargetNearbyPartyMembers,			// 33
+-	&Spell::SpellTargetNULL,						// 34 Not handled (No spells)
+-	&Spell::SpellTargetSingleTargetPartyMember,		// 35
+-	&Spell::SpellTargetScriptedEffects2,			// 36
+-	&Spell::SpellTargetPartyMember,					// 37
+-	&Spell::SpellTargetDummyTarget,					// 38
+-	&Spell::SpellTargetFishing,						// 39
+-	&Spell::SpellTargetType40,						// 40
+-	&Spell::SpellTargetTotem,						// 41
+-	&Spell::SpellTargetTotem,						// 42
+-	&Spell::SpellTargetTotem,						// 43
+-	&Spell::SpellTargetTotem,						// 44
+-	&Spell::SpellTargetChainTargeting,				// 45
+-	&Spell::SpellTargetSimpleTargetAdd,				// 46
+-	&Spell::SpellTargetSimpleTargetAdd,				// 47
+-	&Spell::SpellTargetSimpleTargetAdd,				// 48
+-	&Spell::SpellTargetSimpleTargetAdd,				// 49
+-	&Spell::SpellTargetSimpleTargetAdd,				// 50
+-	&Spell::SpellTargetNULL,						// 51
+-	&Spell::SpellTargetGameObjectsInArea,			// 52
+-	&Spell::SpellTargetTargetAreaSelectedUnit,		// 53
+-	&Spell::SpellTargetInFrontOfCaster2,			// 54
+-	&Spell::SpellTargetNULL,						// 55 Not handled (Not realy handled by the current spell system)
+-	&Spell::SpellTarget56,							// 56
+-	&Spell::SpellTargetTargetPartyMember,			// 57
+-	&Spell::SpellTargetNULL,						// 58
+-	&Spell::SpellTargetNULL,						// 59
+-	&Spell::SpellTargetNULL,						// 60 // scripted target fill..
+-	&Spell::SpellTargetSameGroupSameClass,			// 61
+-	&Spell::SpellTargetNULL,						// 62 // targets the priest champion, big range..
+-	&Spell::SpellTargetScriptedEffects,				// 63 // summon [] creature
+-	&Spell::SpellTargetSimpleTargetAdd,				// 64 // summon [] creature
+-	&Spell::SpellTargetSimpleTargetAdd,				// 65 // summon [] creature
+-	&Spell::SpellTargetSimpleTargetAdd,				// 66 // summon [] creature
+-	&Spell::SpellTargetSimpleTargetAdd,				// 67 // summon [] creature
+-	&Spell::SpellTargetNULL,						// 68 Not handled (No spells)
+-	&Spell::SpellTargetTotem,						// 69 // Spitfire totem
+-	&Spell::SpellTargetNULL,						// 70 Not handled (No spells)
+-	&Spell::SpellTargetNULL,						// 71 Not handled (No spells)
+-	&Spell::SpellTargetSimpleTargetAdd,				// 72 // summon [] creature + trow items
+-	&Spell::SpellTargetSummon,						// 73
+-	&Spell::SpellTargetNULL,						// 74
+-	&Spell::SpellTargetNULL,						// 75
+-	&Spell::SpellTargetAllTargetsInArea,			// 76
+-	&Spell::SpellTargetSingleTargetEnemy,			// 77
+-	&Spell::SpellTargetNULL,						// 78
+-	&Spell::SpellTargetNULL,						// 79
+-	&Spell::SpellTargetNULL,						// 80
+-	&Spell::SpellTargetNULL,						// 81
+-	&Spell::SpellTargetNULL,						// 82
+-	&Spell::SpellTargetNULL,						// 83
+-	&Spell::SpellTargetNULL,						// 84
+-	&Spell::SpellTargetNULL,						// 85
+-	&Spell::SpellTargetNULL,						// 86
+-	&Spell::SpellTargetAreaOfEffect87,				// 87
+-	&Spell::SpellTargetNULL,						// 88
+-	&Spell::SpellTargetProjectile,					// 89 Fill Targets Trajectory
+-	&Spell::SpellTargetNULL,						// 90
+-	&Spell::SpellTargetNULL,						// 91
+-	&Spell::SpellTargetNULL,						// 92
+-	&Spell::SpellTargetNULL,						// 93
+-	&Spell::SpellTargetVehicle,						// 94
+-	&Spell::SpellTargetVehicleDriver,				// 95
+-	&Spell::SpellTargetVehiclePassenger,			// 96
+-	&Spell::SpellTargetVehiclePassenger1,			// 97
+-	&Spell::SpellTargetVehiclePassenger2,			// 98
+-	&Spell::SpellTargetVehiclePassenger3,			// 99
+-	&Spell::SpellTargetVehiclePassenger4,			// 100
+-	&Spell::SpellTargetVehiclePassenger5,			// 101
+-	&Spell::SpellTargetVehiclePassenger6,			// 102
+-	&Spell::SpellTargetVehiclePassenger7,			// 103
+-	&Spell::SpellTargetInFrontOfCaster,				// 104
+-	&Spell::SpellTargetNULL,						// 105
+-	&Spell::SpellTargetNULL,						// 106
+-	&Spell::SpellTargetNULL,						// 107
+-	&Spell::SpellTargetNULL,						// 108
+-	&Spell::SpellTargetNULL,						// 109
+-	&Spell::SpellTargetNULL,						// 110
+-	// all 110 > n spelltargettype's are from test spells
+-};
++	uint32 type = implicitTargetFlags[implicittarget];
+ 
++	//CHAIN SPELLS ALWAYS CHAIN!
++	uint32 jumps = m_spellInfo->EffectChainTarget[i];
++	if(u_caster != NULL)
++		SM_FIValue(u_caster->SM[SMT_JUMP_REDUCE][0], (int32*)&jumps, m_spellInfo->SpellGroupType);
++	if(jumps != 0)
++		type |= SPELL_TARGET_AREA_CHAIN;
++	return type;
++}
++
+ /// Fill the target map with the targets
+ /// the targets are specified with numbers and handled accordingly
+ void Spell::FillTargetMap(uint32 i)
+ {
+-	uint32 cur;
++	if(!m_caster->IsInWorld())
++		return;
+ 
+-	uint32 TypeA = GetSpellProto()->EffectImplicitTargetA[i];
+-	uint32 TypeB = GetSpellProto()->EffectImplicitTargetB[i];
++	uint32 TargetType = GetTargetType(m_spellInfo->EffectImplicitTargetA[i], i);
+ 
+-	// if all secondary targets are 0 then use only primary targets
+-	if(!TypeB)
+-	{
+-		if(TypeA < TOTAL_SPELL_TARGET)
+-			(this->*SpellTargetHandler[TypeA])(i, 0);		//0=A
+-		else
+-		{
+-			if(sLog.IsOutDevelopement())
+-				printf("[SPELL][TARGET] Unknown Target Type  %u in spell %u\n", TypeA, GetSpellProto()->Id);
+-			else
+-				sLog.outSpellDebug("[SPELL][TARGET] Unknown Target Type  %u in spell %u", TypeA, GetSpellProto()->Id);
+-		}
++	//never get info from B if it is 0 :P
++	if(m_spellInfo->EffectImplicitTargetB[i] != 0)
++		TargetType |= GetTargetType(m_spellInfo->EffectImplicitTargetB[i], i);
+ 
++	if(TargetType == SPELL_TARGET_NONE)
+ 		return;
+-	}
+ 
+-	// if all primary targets are 0 then use only secondary targets
+-	if(!TypeA)
++	if(TargetType & SPELL_TARGET_NOT_IMPLEMENTED)
++		return;
++	if(TargetType & SPELL_TARGET_NO_OBJECT)  //summon spells that appear infront of caster
+ 	{
+-		if(TypeB < TOTAL_SPELL_TARGET)
+-			(this->*SpellTargetHandler[TypeB])(i, 1);		//1=B
+-		else
+-		{
+-			if(sLog.IsOutDevelopement())
+-				printf("[SPELL][TARGET] Unknown Target Type  %u in spell %u\n", TypeB, GetSpellProto()->Id);
+-			else
+-				sLog.outSpellDebug("[SPELL][TARGET] Unknown Target Type  %u in spell %u", TypeB, GetSpellProto()->Id);
+-		}
+-
++		HandleTargetNoObject();
+ 		return;
+ 	}
+ 
+-	// j = 0
+-	cur = GetSpellProto()->EffectImplicitTargetA[i];
+-	if (cur < TOTAL_SPELL_TARGET)
++	//always add this guy :P
++	if(!(TargetType & (SPELL_TARGET_AREA | SPELL_TARGET_AREA_SELF | SPELL_TARGET_AREA_CURTARGET | SPELL_TARGET_AREA_CONE | SPELL_TARGET_OBJECT_SELF | SPELL_TARGET_OBJECT_PETOWNER)))
+ 	{
+-		(this->*SpellTargetHandler[cur])(i,0);	//0=A
++		Object* target = m_caster->GetMapMgr()->_GetObject(m_targets.m_unitTarget);
++		AddTarget(i, TargetType, target);
+ 	}
+-	else
++
++	if(TargetType & SPELL_TARGET_OBJECT_SELF)
++		AddTarget(i, TargetType, m_caster);
++
++	if(TargetType & (SPELL_TARGET_AREA | SPELL_TARGET_AREA_SELF))  //targetted aoe
++		AddAOETargets(i, TargetType, GetRadius(i), m_spellInfo->MaxTargets);
++
++	//TODO: support summon slots?
++	/*if (TargetType & SPELL_TARGET_OBJECT_CURTOTEMS && u_caster != NULL)
++		for (uint32 i=1; i<5; ++i) //totem slots are 1, 2, 3, 4
++			AddTarget(i, TargetType, u_caster->m_summonslot[i]);*/
++
++	if(TargetType & SPELL_TARGET_OBJECT_CURPET && p_caster != NULL)
++		AddTarget(i, TargetType, p_caster->GetSummon());
++
++	if(TargetType & SPELL_TARGET_OBJECT_PETOWNER)
+ 	{
+-		if(sLog.IsOutDevelopement())
+-			printf("[SPELL][TARGET] Unknown Target Type  %u in spell %u\n", cur, GetSpellProto()->Id);
+-		else
+-			sLog.outSpellDebug("[SPELL][TARGET] Unknown Target Type  %u in spell %u", cur, GetSpellProto()->Id);
++		uint64 guid = m_targets.m_unitTarget;
++		if(GET_TYPE_FROM_GUID(guid) == HIGHGUID_TYPE_PET)
++		{
++			Pet* p = m_caster->GetMapMgr()->GetPet(GET_LOWGUID_PART(guid));
++
++			if(p != NULL)
++				AddTarget(i, TargetType, p->GetPetOwner());
++		}
+ 	}
+ 
+-	// j = 1
+-	cur = GetSpellProto()->EffectImplicitTargetB[i];
+-	if (cur < TOTAL_SPELL_TARGET)
++	//targets party, not raid
++	if((TargetType & SPELL_TARGET_AREA_PARTY) && !(TargetType & SPELL_TARGET_AREA_RAID))
+ 	{
+-		(this->*SpellTargetHandler[cur])(i,1);	//1=B
+-	}
+-	else
+-	{
+-		if(sLog.IsOutDevelopement())
+-			printf("[SPELL][TARGET] Unknown Target Type  %u in spell %u\n", cur, GetSpellProto()->Id);
++		if(p_caster == NULL && !m_caster->IsPet() && (!m_caster->IsCreature() || !m_caster->IsTotem()))
++			AddAOETargets(i, TargetType, GetRadius(i), m_spellInfo->MaxTargets); //npcs
+ 		else
+-			sLog.outSpellDebug("[SPELL][TARGET] Unknown Target Type  %u in spell %u", cur, GetSpellProto()->Id);
++			AddPartyTargets(i, TargetType, GetRadius(i), m_spellInfo->MaxTargets); //players/pets/totems
+ 	}
+-}
+ 
+-void Spell::SpellTargetNULL(uint32 i, uint32 j)
+-{
+-	if(GetSpellProto()->EffectImplicitTargetA[j] != 0 && GetSpellProto()->EffectImplicitTargetB[j] != 0)
++	if(TargetType & SPELL_TARGET_AREA_RAID)
+ 	{
+-		if(sLog.IsOutDevelopement())
+-			printf("[SPELL][TARGET] Unhandled target typeA: %u typeB: %u\n", GetSpellProto()->EffectImplicitTargetA[j], GetSpellProto()->EffectImplicitTargetB[j]);
++		if(p_caster == NULL && !m_caster->IsPet() && (!m_caster->IsCreature() || !m_caster->IsTotem()))
++			AddAOETargets(i, TargetType, GetRadius(i), m_spellInfo->MaxTargets); //npcs
+ 		else
+-			sLog.outSpellDebug("[SPELL][TARGET] Unhandled target typeA: %u typeB: %u", GetSpellProto()->EffectImplicitTargetA[j], GetSpellProto()->EffectImplicitTargetB[j]);
++			AddRaidTargets(i, TargetType, GetRadius(i), m_spellInfo->MaxTargets, (TargetType & SPELL_TARGET_AREA_PARTY) ? true : false); //players/pets/totems
+ 	}
+-}
+ 
+-/// Spell Target Handling for type 0: Default targeting
+-void Spell::SpellTargetDefault(uint32 i, uint32 j)
+-{
+-	if(j==0 || (m_caster->IsPet() && j==1))
+-	{
+-		if(m_targets.m_unitTarget)
+-			_AddTargetForced(m_targets.m_unitTarget, i);
+-		else if(m_targets.m_itemTarget)
+-			_AddTargetForced(m_targets.m_itemTarget, i);
+-		else if( GetSpellProto()->Effect[i] == SPELL_EFFECT_ADD_FARSIGHT ||
+-				 GetSpellProto()->Effect[i] == SPELL_EFFECT_SUMMON_DEMON )
+-			_AddTargetForced(m_caster->GetGUID(), i);
+-	}
+-}
++	if(TargetType & SPELL_TARGET_AREA_CHAIN)
++		AddChainTargets(i, TargetType, GetRadius(i), m_spellInfo->MaxTargets);
+ 
+-/// Spell Target Handling for type 1: Self Target + in moon skin form party member in radius
+-void Spell::SpellTargetSelf(uint32 i, uint32 j)
+-{
+-	_AddTargetForced(m_caster->GetGUID(), i);
+-}
+-void Spell::SpellTargetInvisibleAOE(uint32 i, uint32 j)
+-{
+-	FillSpecifiedTargetsInArea(i,m_targets.m_destX,m_targets.m_destY,m_targets.m_destZ,GetRadius(i),1); //TARGET_SPEC_INVISIBLE);
+-}
++	//target cone
++	if(TargetType & SPELL_TARGET_AREA_CONE)
++		AddConeTargets(i, TargetType, GetRadius(i), m_spellInfo->MaxTargets);
+ 
+-/// Spell Target Handling for type 4: Target is holder of the aura
+-void Spell::SpellTargetFriendly(uint32 i, uint32 j)
+-{
+-	// O fuck we are contagious...
+-	// this off course is not tested yet.
+-	if (p_caster)
+-		_AddTargetForced(p_caster->GetGUID(), i);
++	if(TargetType & SPELL_TARGET_OBJECT_SCRIPTED)
++		AddScriptedOrSpellFocusTargets(i, TargetType, GetRadius(i), m_spellInfo->MaxTargets);
+ }
+ 
+-/// Spell Target Handling for type 5: Target: Pet
+-void Spell::SpellTargetPet(uint32 i, uint32 j)
++void Spell::HandleTargetNoObject()
+ {
+-	if(p_caster)
++	float dist = 3;
++	float newx = m_caster->GetPositionX() + cosf(m_caster->GetOrientation()) * dist;
++	float newy = m_caster->GetPositionY() + sinf(m_caster->GetOrientation()) * dist;
++	float newz = m_caster->GetPositionZ();
++
++	//clamp Z
++	newz = m_caster->GetCHeightForPosition(true, newx, newy, newz);
++
++	//if not in line of sight, or too far away we summon inside caster
++	if(fabs(newz - m_caster->GetPositionZ()) > 10 || !CollideInterface.CheckLOS(m_caster->GetMapId(), m_caster->GetPositionX(), m_caster->GetPositionY(), m_caster->GetPositionZ() + 2, newx, newy, newz + 2))
+ 	{
+-		if( p_caster->GetSummon() != NULL )
+-			_AddTargetForced( p_caster->GetSummon()->GetGUID(), i );
++		newx = m_caster->GetPositionX();
++		newy = m_caster->GetPositionY();
++		newz = m_caster->GetPositionZ();
+ 	}
++
++	m_targets.m_targetMask |= TARGET_FLAG_DEST_LOCATION;
++	m_targets.m_destX = newx;
++	m_targets.m_destY = newy;
++	m_targets.m_destZ = newz;
+ }
+ 
+-/// Spell Target Handling for type 6 and 77: Single Target Enemy (grep thinks 77 fits in 6)
+-void Spell::SpellTargetSingleTargetEnemy(uint32 i, uint32 j)
++bool Spell::AddTarget(uint32 i, uint32 TargetType, Object* obj)
+ {
+-	if(!m_caster->IsInWorld())
+-		return;
++	if(obj == NULL || !obj->IsInWorld())
++		return false;
+ 
+-	Unit* pTarget = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-	if(!pTarget)
+-		return;
++	//GO target, not item
++	if((TargetType & SPELL_TARGET_REQUIRE_GAMEOBJECT) && !(TargetType & SPELL_TARGET_REQUIRE_ITEM) && !obj->IsGameObject())
++		return false;
+ 
+-	if(GetSpellProto()->TargetCreatureType)
+-	{
+-		if(!(1<<(pTarget->GetCreatureType()-1) & GetSpellProto()->TargetCreatureType))
+-				return;
+-	}
++	//target go, not able to target go
++	if(obj->IsGameObject() && !(TargetType & SPELL_TARGET_OBJECT_SCRIPTED) && !(TargetType & SPELL_TARGET_REQUIRE_GAMEOBJECT) && !m_triggeredSpell)
++		return false;
++	//target item, not able to target item
++	if(obj->IsItem() && !(TargetType & SPELL_TARGET_REQUIRE_ITEM) && !m_triggeredSpell)
++		return false;
+ 
+-	if(p_caster && pTarget != p_caster)
+-	{
+-		// this is mostly used for things like duels
+-		if(pTarget->IsPlayer() && !isAttackable(p_caster, pTarget, false))
+-		{
+-			cancastresult = SPELL_FAILED_BAD_TARGETS;
+-			return;
+-		}
+-	}
++	if(u_caster != NULL && u_caster->HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_9) && ((obj->IsPlayer() || obj->IsPet()) || (p_caster != NULL || m_caster->IsPet())))
++		return false;
+ 
+-	// magnet!!!!!
+-	if( pTarget->IsPlayer() && TO_PLAYER(pTarget)->m_magnetAura != NULL && m_magnetTarget == NULL )
++	if(TargetType & SPELL_TARGET_REQUIRE_FRIENDLY && !isFriendly(m_caster, obj))
++		return false;
++	if(TargetType & SPELL_TARGET_REQUIRE_ATTACKABLE && !isAttackable(m_caster, obj))
++		return false;
++	if(TargetType & SPELL_TARGET_OBJECT_TARCLASS)
+ 	{
+-		if(!GetSpellProto()->is_melee_spell && GetType() == SPELL_DMG_TYPE_MAGIC )
+-		{
+-			// redirect it to the magnet
+-			m_magnetTarget = TO_PLAYER(pTarget)->m_magnetAura->GetUnitCaster();
++		Object* originaltarget = m_caster->GetMapMgr()->_GetObject(m_targets.m_unitTarget);
+ 
+-			// clear the magnet aura
+-			TO_PLAYER(pTarget)->m_magnetAura->Remove();
+-		}
++		if(originaltarget == NULL || (originaltarget->IsPlayer() && obj->IsPlayer() && TO_PLAYER(originaltarget)->getClass() != TO_PLAYER(obj)->getClass()) || (originaltarget->IsPlayer() && !obj->IsPlayer()) || (!originaltarget->IsPlayer() && obj->IsPlayer()))
++			return false;
+ 	}
++	if(TargetType & SPELL_TARGET_OBJECT_CURPET && !obj->IsPet())
++		return false;
++	if(TargetType & (SPELL_TARGET_AREA | SPELL_TARGET_AREA_SELF | SPELL_TARGET_AREA_CURTARGET | SPELL_TARGET_AREA_CONE | SPELL_TARGET_AREA_PARTY | SPELL_TARGET_AREA_RAID) && ((obj->IsUnit() && !TO_UNIT(obj)->isAlive()) || (obj->IsCreature() && obj->IsTotem())))
++		return false;
+ 
+-	if( m_magnetTarget != NULL )
+-	{
+-		// if the target exists, shoot it at him.
+-		if( m_magnetTarget != NULL && m_magnetTarget->IsInWorld() && !m_magnetTarget->isDead() )
+-			pTarget = m_magnetTarget;
+-	}
++	if(TargetType & SPELL_TARGET_REQUIRE_ATTACKABLE && obj->IsUnit())
++		_AddTarget(TO_UNIT(obj), i);
++	else
++		_AddTargetForced(obj->GetGUID(), i);
+ 
+-	_AddTarget(pTarget, i);
+-
+-	if(GetSpellProto()->EffectChainTarget[i])
++	//final checks, require line of sight unless range/radius is 50000 yards
++	SpellRange* r = dbcSpellRange.LookupEntry(m_spellInfo->rangeIndex);
++	if(sWorld.Collision && r->maxRangeHostile < 50000 && GetRadius(i) < 50000 && !obj->IsItem())
+ 	{
+-		uint32 jumps = GetSpellProto()->EffectChainTarget[i]-1;
+-		float range = GetMaxRange(dbcSpellRange.LookupEntry(GetSpellProto()->rangeIndex));//this is probably wrong
+-		range *= range;
++		float x = m_caster->GetPositionX(), y = m_caster->GetPositionY(), z = m_caster->GetPositionZ() + 0.5f;
+ 
+-		uint32 placeholder = 0;
+-		vector<Object*> ChainTargetContainer;
+-		unordered_set<Object*>::iterator itr;
+-		for( itr = pTarget->GetInRangeSetBegin(); itr != pTarget->GetInRangeSetEnd(); itr++ )
++		//are we using a different location?
++		if(TargetType & SPELL_TARGET_AREA)
+ 		{
+-			if((*itr)->GetGUID() == m_targets.m_unitTarget)
+-				continue;
+-			if( !((*itr)->IsUnit()) || !TO_UNIT(*itr)->isAlive())
+-				continue;
+-
+-			if(IsInrange(pTarget->GetPositionX(),pTarget->GetPositionY(),pTarget->GetPositionZ(),(*itr),range))
++			x = m_targets.m_destX;
++			y = m_targets.m_destY;
++			z = m_targets.m_destZ;
++		}
++		else if(TargetType & SPELL_TARGET_AREA_CHAIN)
++		{
++			//TODO: Add support for this in arcemu
++			/*Object* lasttarget = NULL;
++			if (m_orderedObjects.size() > 0)
+ 			{
+-				if(isAttackable(u_caster,TO_UNIT(*itr)))
++				lasttarget = m_caster->GetMapMgr()->_GetObject(m_orderedObjects[m_orderedObjects.size() - 1]);
++				if (lasttarget != NULL)
+ 				{
+-					ChainTargetContainer.push_back(*itr);
+-					++placeholder;
++					x = lasttarget->GetPositionX();
++					y = lasttarget->GetPositionY();
++					z = lasttarget->GetPositionZ();
+ 				}
+-			}
++			}*/
+ 		}
+ 
+-		Object *chaintarget = NULL;
+-		while(jumps && ChainTargetContainer.size())
+-		{
+-			placeholder = (rand()%ChainTargetContainer.size());
+-			chaintarget = ChainTargetContainer.at(placeholder);
+-			if(chaintarget == NULL)
+-				continue;
+-
+-			_AddTarget(TO_UNIT(chaintarget), i);
+-			ChainTargetContainer.erase(ChainTargetContainer.begin()+placeholder);
+-			jumps--;
+-		}
+-		ChainTargetContainer.clear();
++		if(!CollideInterface.CheckLOS(m_caster->GetMapId(), x, y, z + 2, obj->GetPositionX(), obj->GetPositionY(), obj->GetPositionZ() + 2))
++			return false;
+ 	}
++	return true;
+ }
+ 
+-/// Spell Target Handling for type 8:  related to Chess Move (DND), Firecrackers, Spotlight, aedm, Spice Mortar
+-/// Seems to be some kind of custom area of effect... Scripted... or something like that
+-void Spell::SpellTargetCustomAreaOfEffect(uint32 i, uint32 j)
++void Spell::AddAOETargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets)
+ {
+-	// This should be good enough for now
+-	FillAllTargetsInArea(i,m_targets.m_destX,m_targets.m_destY,m_targets.m_destZ,GetRadius(i));
+-}
++	LocationVector source;
+ 
+-/// Spell Target Handling for type 15 / 16: All Enemies in Area of Effect (instant)
+-void Spell::SpellTargetAreaOfEffect(uint32 i, uint32 j)
+-{
+-	FillAllTargetsInArea(i,m_targets.m_destX,m_targets.m_destY,m_targets.m_destZ,GetRadius(i));
+-}
++	//cant do raid/party stuff here, seperate functions for it
++	if(TargetType & (SPELL_TARGET_AREA_PARTY | SPELL_TARGET_AREA_RAID) && !(p_caster == NULL && !m_caster->IsPet() && (!m_caster->IsCreature() || !m_caster->IsTotem())))
++		return;
+ 
+-/// Spell Target Handling for type 18: Land under caster
+-void Spell::SpellTargetLandUnderCaster(uint32 i, uint32 j) /// I don't think this is the correct name for this one
+-{
+-	if(	GetSpellProto()->Effect[i] != SPELL_EFFECT_SUMMON_DEMON &&
+-		GetSpellProto()->Effect[i] != SPELL_EFFECT_SUMMON_OBJECT_WILD &&
+-		GetSpellProto()->Effect[i] != SPELL_EFFECT_SUMMON_OBJECT_SLOT1 &&
+-		GetSpellProto()->Effect[i] != SPELL_EFFECT_SUMMON_OBJECT_SLOT2 &&
+-		GetSpellProto()->Effect[i] != SPELL_EFFECT_SUMMON_OBJECT_SLOT3 &&
+-		GetSpellProto()->Effect[i] != SPELL_EFFECT_SUMMON_OBJECT_SLOT4 )
+-		FillAllTargetsInArea(i, m_caster->GetPositionX(), m_caster->GetPositionY(), m_caster->GetPositionZ(), GetRadius(i));
+-	else
+-		_AddTargetForced(m_caster->GetGUID(), i);
+-}
++	Object* tarobj = m_caster->GetMapMgr()->_GetObject(m_targets.m_unitTarget);
+ 
+-/// Spell Target Handling for type 18: All Party Members around the Caster in given range NOT RAID
+-void Spell::SpellTargetAllPartyMembersRangeNR(uint32 i, uint32 j)
+-{
+-	Player* p = p_caster;
+-
+-	if( p == NULL )
++	if(TargetType & SPELL_TARGET_AREA_SELF)
++		source = m_caster->GetPosition();
++	else if(TargetType & SPELL_TARGET_AREA_CURTARGET && tarobj != NULL)
++		source = tarobj->GetPosition();
++	else
+ 	{
+-		if( TO_CREATURE( u_caster)->IsTotem() )
+-			p = TO_PLAYER( TO_CREATURE(u_caster)->GetSummonOwner());
+-		else if( u_caster->IsPet() && TO_PET( u_caster )->GetPetOwner() )
+-			p = TO_PET( u_caster )->GetPetOwner();
++		m_targets.m_targetMask |= TARGET_FLAG_DEST_LOCATION;
++		source.x = m_targets.m_destX;
++		source.y = m_targets.m_destY;
++		source.z = m_targets.m_destZ;
+ 	}
+ 
+-	if( p == NULL )
+-		return;
++	//caster might be in the aoe LOL
++	if(m_caster->CalcDistance(source) <= r)
++		AddTarget(i, TargetType, m_caster);
+ 
+-	float r = GetFriendlyRadius(i);
+-
+-	r *= r;
+-	if( IsInrange( m_caster->GetPositionX(), m_caster->GetPositionY(), m_caster->GetPositionZ(), p, r ) )
+-		_AddTargetForced(p->GetGUID(), i);
+-
+-	SubGroup* subgroup = p->GetGroup() ? p->GetGroup()->GetSubGroup( p->GetSubGroup() ) : 0;
+-
+-	if( subgroup != NULL )
++	for(ObjectSet::iterator itr = m_caster->GetInRangeSetBegin(); itr != m_caster->GetInRangeSetEnd(); ++itr)
+ 	{
+-		p->GetGroup()->Lock();
+-		for(GroupMembersSet::iterator itr = subgroup->GetGroupMembersBegin(); itr != subgroup->GetGroupMembersEnd(); itr++)
+-		{
+-			if(!(*itr)->m_loggedInPlayer || m_caster == (*itr)->m_loggedInPlayer)
+-				continue;
+-			if(IsInrange(m_caster->GetPositionX(),m_caster->GetPositionY(),m_caster->GetPositionZ(),(*itr)->m_loggedInPlayer,r))
+-				_AddTargetForced( (*itr)->m_loggedInPlayer->GetGUID(), i );
+-		}
+-		p->GetGroup()->Unlock();
++		if(maxtargets != 0 && m_targetList.size() >= maxtargets)
++			break;
++
++		float dist = (*itr)->CalcDistance(source);
++		if(dist <= r)
++			AddTarget(i, TargetType, (*itr));
+ 	}
+ }
+ 
+-/// Spell Target Handling for type 21: Single Target Friend
+-void Spell::SpellTargetSingleTargetFriend(uint32 i, uint32 j)
++void Spell::AddPartyTargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets)
+ {
+-	Unit* Target;
+-	if(m_targets.m_unitTarget == m_caster->GetGUID())
+-		Target = u_caster;
+-	else
+-		Target = m_caster->IsInWorld() ? m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget) : NULLUNIT;
+-	if(Target == NULLUNIT)
++	Object* u = m_caster->GetMapMgr()->_GetObject(m_targets.m_unitTarget);
++	if(u == NULL)
++		u = m_caster;
++
++	if(u == NULL || u_caster == NULL || !u->IsPlayer())
+ 		return;
+ 
+-	float r = GetFriendlyMaxRange(dbcSpellRange.LookupEntry(GetSpellProto()->rangeIndex));
+-	if(IsInrange(m_caster, Target, r*r))
+-		_AddTargetForced(Target->GetGUID(), i);
+-}
++	Player* p = TO_PLAYER(u);
++	AddTarget(i, TargetType, p);
+ 
+-/// Spell Target Handling for type 22: Enemy Targets around the Caster//changed party members around you
+-/// place around the target / near the target //targeted Area effect
+-void Spell::SpellTargetAoE(uint32 i, uint32 j) // something special
+-// grep: this is *totally* broken. AoE only attacking friendly party members and self
+-// is NOT correct. // not correct at all:P
+-{
+-	FillAllTargetsInArea(i,m_caster->GetPositionX(),m_caster->GetPositionY(),m_caster->GetPositionZ(),GetRadius(i));
+-}
++	ObjectSet::iterator itr;
++	for(itr = u->GetInRangeSetBegin(); itr != u->GetInRangeSetEnd(); itr++)
++	{
++		if(!(*itr)->IsUnit() || !TO_UNIT(*itr)->isAlive())
++			continue;
+ 
+-/// Spell Target Handling for type 23: Gameobject Target
+-void Spell::SpellTargetSingleGameobjectTarget(uint32 i, uint32 j)
+-{
+-	_AddTargetForced(m_targets.m_unitTarget, i);
+-}
++		//only affect players and pets
++		if(!(*itr)->IsPlayer() && !(*itr)->IsPet())
++			continue;
+ 
+-/// Spell Target Handling for type 24: Targets in Front of the Caster
+-void Spell::SpellTargetInFrontOfCaster(uint32 i, uint32 j)
+-{
+-	unordered_set< Object* >::iterator itr,itr2;
++		if(!p->IsGroupMember(TO_PLAYER(*itr)))
++			continue;
+ 
+-	if( GetSpellProto()->cone_width == 0.0f )
+-	{
+-		for( itr = m_caster->GetInRangeSetBegin(); itr != m_caster->GetInRangeSetEnd();)
+-		{
+-			itr2 = itr++;
+-			if((*itr2)->IsUnit() && !(TO_UNIT(*itr2)->isAlive()))
+-				continue;
++		if(u->CalcDistance(*itr) > r)
++			continue;
+ 
+-			//is Creature in range
+-			if(m_caster->isInRange((*itr2),GetRadius(i)))
+-			{
+-				if(m_caster->isTargetInFront(*itr2))
+-				{
+-					if((*itr2)->IsUnit())
+-					{
+-						if(isAttackable(u_caster, (*itr2)))
+-							_AddTarget(TO_UNIT(*itr2), i);
+-					}
+-					else
+-						_AddTargetForced((*itr2)->GetGUID(), i);
+-				}
+-			}
+-		}
++		AddTarget(i, TargetType, (*itr));
+ 	}
+-	else
+-	{
+-		for( itr = m_caster->GetInRangeSetBegin(); itr != m_caster->GetInRangeSetEnd();)
+-		{
+-			itr2 = itr++;
+-			if((*itr2)->IsUnit() && !(TO_UNIT(*itr2)->isAlive()))
+-				continue;
+-
+-			//is Creature in range
+-			if(m_caster->isInArc(*itr2, GetSpellProto()->cone_width))
+-			{
+-				if(m_caster->isTargetInFront((*itr2)))
+-				{
+-					if((*itr2)->IsUnit())
+-					{
+-						if(isAttackable(u_caster, (*itr2)))
+-							_AddTarget(TO_UNIT(*itr2), i);
+-					}
+-					else
+-						_AddTargetForced((*itr2)->GetGUID(), i);
+-				}
+-			}
+-		}
+-	}
+ }
+ 
+-/// Spell Target Handling for type 25: Single Target Friend	 // Used o.a. in Duel
+-void Spell::SpellTargetSingleFriend(uint32 i, uint32 j)
++void Spell::AddRaidTargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets, bool partylimit)
+ {
+-	_AddTargetForced(m_targets.m_unitTarget, i);
+-}
++	Object* u = m_caster->GetMapMgr()->_GetObject(m_targets.m_unitTarget);
++	if(u == NULL)
++		u = m_caster;
+ 
+-/// Spell Target Handling for type 26: unit target/Item Target
+-/// game object and item related... research pickpocket stuff
+-void Spell::SpellTargetGameobject_itemTarget(uint32 i, uint32 j)
+-{
+-	if( m_targets.m_unitTarget )
+-		_AddTargetForced(m_targets.m_unitTarget, i);
+-
+-	if( m_targets.m_itemTarget )
+-		_AddTargetForced(m_targets.m_itemTarget, i);
+-}
+-
+-/// Spell Target Handling for type 27: target is owner of pet
+-void Spell::SpellTargetPetOwner(uint32 i, uint32 j)
+-{
+-	if( u_caster->IsPet() && TO_PET(u_caster)->GetPetOwner() )
+-		_AddTargetForced( TO_PET(u_caster)->GetPetOwner()->GetGUID(), i );
+-}
+-
+-/// this is handled in DO
+-/// Spell Target Handling for type 28: All Enemies in Area of Effect(Blizzard/Rain of Fire/volley) channeled
+-void Spell::SpellTargetEnemysAreaOfEffect(uint32 i, uint32 j)
+-{
+-	FillAllTargetsInArea(i,m_targets.m_destX,m_targets.m_destY,m_targets.m_destZ,GetRadius(i));
+-}
+-
+-// all object around the the caster / object
+-/*
+-mysql> select id,name from spell where EffectImplicitTargetb1 = 29;
+-+-------+-----------------------------------------------+
+-| 23467 | Tower Buff									|
+-| 32087 | Putrid Cloud								  |
+-| 34378 | Thrall Calls Thunder						  |
+-| 35487 | Seed of Revitalization Lightning Cloud Visual |
+-| 36037 | Rina's Bough Lightning Cloud Visual		   |
+-+-------+-----------------------------------------------+
+-*/
+-/// Spell Target Handling for type 29: all object around the the caster / object (so it seems)
+-void Spell::SpellTargetTypeTAOE(uint32 i, uint32 j)
+-{
+-	Unit* Target = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-	if( Target == NULL )
++	if(u == NULL || u_caster == NULL || !u->IsPlayer())
+ 		return;
+ 
+-	// tranquility
+-	if( u_caster != NULL && GetSpellProto()->NameHash == SPELL_HASH_TRANQUILITY )
+-		_AddTargetForced(u_caster->GetGUID(), i);
+-	else
+-	{
+-		FillAllTargetsInArea( (LocationVector&)Target->GetPosition(), i );
+-	}
+-}
++	Player* p = TO_PLAYER(u);
++	AddTarget(i, TargetType, p);
+ 
+-void Spell::SpellTargetPositionOfTarget(uint32 i, uint32 j)
+-{
+-	// Something with AOE. Who knows?
+-}
+-
+-/// Spell Target Handling for type 30: PBAE Party Based Area Effect
+-void Spell::SpellTargetAllyBasedAreaEffect(uint32 i, uint32 j)
+-{
+-	/* Description
+-	We take the selected party member(also known as target), then we get a list of all the party members in the area
+-
+-	// Used in
+-	26043 -> Battle Shout
+-	*/
+-	FillAllFriendlyInArea(i,m_caster->GetPositionX(),m_caster->GetPositionY(),m_caster->GetPositionZ(),GetFriendlyRadius(i));
+-}
+-
+-/// Spell Target Handling for type 31: related to scripted effects
+-void Spell::SpellTargetScriptedEffects(uint32 i, uint32 j)
+-{
+-	if( GetSpellProto()->NameHash == SPELL_HASH_WILD_GROWTH || GetSpellProto()->NameHash == SPELL_HASH_CIRCLE_OF_HEALING )
++	ObjectSet::iterator itr;
++	for(itr = u->GetInRangeSetBegin(); itr != u->GetInRangeSetEnd(); itr++)
+ 	{
+-		if( p_caster == NULL || !p_caster->IsInWorld() )
+-			return;
++		if(!(*itr)->IsUnit() || !TO_UNIT(*itr)->isAlive())
++			continue;
+ 
+-		if( p_caster->GetGroup() )
+-		{
+-			uint32 TargetCount = 0;
+-			p_caster->GetGroup()->Lock();
+-			for(uint32 x = 0; x < p_caster->GetGroup()->GetSubGroupCount(); ++x)
+-			{
+-				if( TargetCount == 5 )
+-					break;
+-				for(GroupMembersSet::iterator itr = p_caster->GetGroup()->GetSubGroup( x )->GetGroupMembersBegin(); itr != p_caster->GetGroup()->GetSubGroup( x )->GetGroupMembersEnd(); itr++)
+-				{
+-					if((*itr)->m_loggedInPlayer && TargetCount != 5)
+-					{
+-						Player* p_target = (*itr)->m_loggedInPlayer;
+-						if( p_caster->GetDistance2dSq( p_target ) <= 225 ) // both spells have 15yd range, change in future if needed
+-						{
+-							_AddTargetForced( (*itr)->m_loggedInPlayer->GetGUID(), i );
+-							TargetCount += 1;
+-						}
+-					}
+-				}
+-			}
+-			p_caster->GetGroup()->Unlock();
+-		}
+-	}
+-	else
+-		FillAllTargetsInArea(i,m_targets.m_destX,m_targets.m_destY,m_targets.m_destZ,GetRadius(i));
+-}
++		//only affect players and pets
++		if(!(*itr)->IsPlayer() && !(*itr)->IsPet())
++			continue;
+ 
+-/// Spell Target Handling for type 32 / 73: related to summoned pet or creature
+-void Spell::SpellTargetSummon(uint32 i, uint32 j)
+-{// Minion Target
+-	if(m_caster->GetUInt64Value(UNIT_FIELD_SUMMON) == 0)
+-		_AddTargetForced(m_caster->GetGUID(), i);
+-	else
+-		_AddTargetForced(m_caster->GetUInt64Value(UNIT_FIELD_SUMMON), i);
+-}
++		if(!p->IsGroupMember(TO_PLAYER(*itr)))
++			continue;
+ 
+-/// Spell Target Handling for type 33: Party members of totem, inside given range
+-void Spell::SpellTargetNearbyPartyMembers(uint32 i, uint32 j)
+-{
+-	// this implementation is wrong.... this one is for totems
+-	if( u_caster != NULL )
+-	{
+-		if( u_caster->GetTypeId()==TYPEID_UNIT)
+-		{
+-			if( TO_CREATURE( u_caster )->IsTotem() )
+-			{
+-				float r = GetRadius(i);
+-				r *= r;
++		if(u->CalcDistance(*itr) > r)
++			continue;
+ 
+-				Player* p = TO_PLAYER( TO_CREATURE(u_caster)->GetSummonOwner());
+-				if( p == NULL)
+-					return;
+-
+-				if(IsInrange(m_caster->GetPositionX(),m_caster->GetPositionY(),m_caster->GetPositionZ(),p,r))
+-					_AddTargetForced(p->GetGUID(), i);
+-
+-				SubGroup * pGroup = p->GetGroup() ?
+-					p->GetGroup()->GetSubGroup(p->GetSubGroup()) : 0;
+-
+-				if(pGroup)
+-				{
+-					p->GetGroup()->Lock();
+-					for(GroupMembersSet::iterator itr = pGroup->GetGroupMembersBegin();
+-						itr != pGroup->GetGroupMembersEnd(); itr++)
+-					{
+-						if(!(*itr)->m_loggedInPlayer || p == (*itr)->m_loggedInPlayer)
+-							continue;
+-						if(IsInrange(m_caster->GetPositionX(),m_caster->GetPositionY(),m_caster->GetPositionZ(),(*itr)->m_loggedInPlayer,r))
+-							_AddTargetForced((*itr)->m_loggedInPlayer->GetGUID(), i);
+-					}
+-					p->GetGroup()->Unlock();
+-				}
+-			}
+-		}
++		AddTarget(i, TargetType, (*itr));
+ 	}
+ }
+ 
+-/// Spell Target Handling for type 35: Single Target Party Member (if not in party then the target can not be himself)
+-/// this one requeres more research
+-void Spell::SpellTargetSingleTargetPartyMember(uint32 i, uint32 j)
++void Spell::AddChainTargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets)
+ {
+ 	if(!m_caster->IsInWorld())
+ 		return;
+ 
+-	Unit* Target = m_caster->GetMapMgr()->GetPlayer((uint32)m_targets.m_unitTarget);
+-	if(!Target)
++	Object* targ = m_caster->GetMapMgr()->_GetObject(m_targets.m_unitTarget);
++	if(targ == NULL)
+ 		return;
+-	float r=GetFriendlyMaxRange(dbcSpellRange.LookupEntry(GetSpellProto()->rangeIndex));
+-	if(IsInrange(m_caster->GetPositionX(),m_caster->GetPositionY(),m_caster->GetPositionZ(),Target,r*r))
+-		_AddTargetForced(m_targets.m_unitTarget, i);
+-}
+ 
+-/// Spell Target Handling for type 36: these targets are scripted :s or something.. there seems to be a system...
+-void Spell::SpellTargetScriptedEffects2(uint32 i, uint32 j)
+-{
++	//if selected target is party member, then jumps on party
++	Unit* firstTarget = NULL;
++	if(targ->IsUnit())
++		firstTarget = TO_UNIT(targ);
++	else
++		firstTarget = u_caster;
+ 
+-}
++	bool RaidOnly = false;
++	float range = GetMaxRange(dbcSpellRange.LookupEntry(m_spellInfo->rangeIndex));//this is probably wrong,
++	//this is cast distance, not searching distance
++	range *= range;
+ 
+-/// Spell Target Handling for type 37: all Members of the targets party
+-void Spell::SpellTargetPartyMember(uint32 i, uint32 j)
+-{
+-	if(!m_caster->IsInWorld())
+-		return;
++	//is this party only?
++	Player* casterFrom = NULL;
++	if(u_caster->IsPlayer())
++		casterFrom = TO_PLAYER(u_caster);
+ 
+-	// if no group target self
+-	Player* Target = m_caster->GetMapMgr()->GetPlayer((uint32)m_targets.m_unitTarget);
+-	if(!Target)
+-		return;
++	Player* pfirstTargetFrom = NULL;
++	if(firstTarget->IsPlayer())
++		pfirstTargetFrom = TO_PLAYER(firstTarget);
+ 
+-	SubGroup * subgroup = Target->GetGroup() ?
+-		Target->GetGroup()->GetSubGroup(Target->GetSubGroup()) : 0;
++	if(casterFrom != NULL && pfirstTargetFrom != NULL && casterFrom->GetGroup() == pfirstTargetFrom->GetGroup())
++		RaidOnly = true;
+ 
+-	if(subgroup)
+-	{
+-		Target->GetGroup()->Lock();
+-		for(GroupMembersSet::iterator itr = subgroup->GetGroupMembersBegin(); itr != subgroup->GetGroupMembersEnd(); itr++)
+-		{
+-			if((*itr)->m_loggedInPlayer)
+-				_AddTargetForced( (*itr)->m_loggedInPlayer->GetGUID(), i );
+-		}
+-		Target->GetGroup()->Unlock();
+-	}
+-	else
+-		_AddTargetForced(Target->GetGUID(), i);
+-}
++	uint32 jumps = m_spellInfo->EffectChainTarget[i];
+ 
+-/// Spell Target Handling for type 38: Dummy Target (Server-side script effect)
+-void Spell::SpellTargetDummyTarget(uint32 i, uint32 j)
+-{
+-	//TargetsList *tmpMap=&m_targetUnits[i];
+-	if( GetSpellProto()->Id == 51699 )
+-	{
+-		if( p_caster )
+-		{
+-			Aura* aur = p_caster->FindAura( 52916 );
+-			if( aur && aur->GetUnitCaster() )
+-			{
+-				_AddTargetForced(aur->GetUnitCaster()->GetGUID(), i);
+-				return;
+-			}
+-		}
+-	}
+-	else if( GetSpellProto()->Id == 12938 )
+-	{
+-		//FIXME:this ll be immortal targets
+-		FillAllTargetsInArea(i,m_targets.m_destX,m_targets.m_destY,m_targets.m_destZ,GetRadius(i));
+-	}
+-	_AddTargetForced(m_caster->GetGUID(), i);
+-}
++	//range
++	range /= jumps; //hacky, needs better implementation!
+ 
+-/// Spell Target Handling for type 39: Fishing
+-void Spell::SpellTargetFishing(uint32 i, uint32 j)
+-{
+-	_AddTargetForced(m_caster->GetGUID(), i);
+-}
++	if(m_spellInfo->SpellGroupType && u_caster != NULL)
++		SM_FIValue(u_caster->SM[SMT_JUMP_REDUCE][0], (int32*)&jumps, m_spellInfo->SpellGroupType);
+ 
+-/// Spell Target Handling for type 40: Activate Object target(probably based on focus)
+-/// movement proc, like traps.
+-void Spell::SpellTargetType40(uint32 i, uint32 j)
+-{
++	AddTarget(i, TargetType, firstTarget);
+ 
+-}
+-
+-/// Spell Target Handling for type 41 / 42 / 43 / 44: Totems
+-void Spell::SpellTargetTotem(uint32 i, uint32 j)
+-{
+-	_AddTargetForced(m_caster->GetGUID(), i);
+-}
+-
+-/// Spell Target Handling for type 45: Chain,!!only for healing!! for chain lightning =6
+-void Spell::SpellTargetChainTargeting(uint32 i, uint32 j)
+-{
+-	if( !m_caster->IsInWorld() )
++	if(jumps <= 1 || m_targetList.size() == 0) //1 because we've added the first target, 0 size if spell is resisted
+ 		return;
+ 
+-	//if selected target is party member, then jumps on party
+-	Unit* firstTarget;
+-
+-	bool PartyOnly = false;
+-	float range = GetMaxRange(dbcSpellRange.LookupEntry(GetSpellProto()->rangeIndex));//this is probably wrong,
+-	//this is cast distance, not searching distance
+-	range *= range;
+-
+-	firstTarget = m_caster->GetMapMgr()->GetPlayer((uint32)m_targets.m_unitTarget);
+-	if( firstTarget && p_caster != NULL )
++	ObjectSet::iterator itr;
++	for(itr = firstTarget->GetInRangeSetBegin(); itr != firstTarget->GetInRangeSetEnd(); itr++)
+ 	{
+-		if( p_caster->InGroup() )
+-			if( p_caster->GetSubGroup() == TO_PLAYER( firstTarget )->GetSubGroup() )
+-				PartyOnly = true;
+-	}
+-	else
+-	{
+-		firstTarget = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-		if(!firstTarget)
+-			return;
+-	}
++		if(!(*itr)->IsUnit() || !TO_UNIT((*itr))->isAlive())
++			continue;
+ 
+-	uint32 jumps = GetSpellProto()->EffectChainTarget[i];
+-	if(GetSpellProto()->SpellGroupType && u_caster)
+-		SM_FIValue(u_caster->SM[SMT_ADDITIONAL_TARGET][0],(int32*)&jumps,GetSpellProto()->SpellGroupType);
+-
+-	_AddTargetForced(firstTarget->GetGUID(), i);
+-	if(jumps == NULL)
+-		return;
+-	jumps--;
+-	if(PartyOnly)
+-	{
+-		GroupMembersSet::iterator itr;
+-		SubGroup * pGroup = p_caster->GetGroup() ?
+-			p_caster->GetGroup()->GetSubGroup(p_caster->GetSubGroup()) : 0;
+-
+-		if(pGroup)
++		if(RaidOnly)
+ 		{
+-			p_caster->GetGroup()->Lock();
+-			for(itr = pGroup->GetGroupMembersBegin(); itr != pGroup->GetGroupMembersEnd(); itr++)
+-			{
+-				if(!(*itr)->m_loggedInPlayer || (*itr)->m_loggedInPlayer==u_caster || (*itr)->m_loggedInPlayer->GetUInt32Value(UNIT_FIELD_HEALTH) == (*itr)->m_loggedInPlayer->GetUInt32Value(UNIT_FIELD_MAXHEALTH))
+-					continue;
+-				if(IsInrange(firstTarget->GetPositionX(),firstTarget->GetPositionY(),firstTarget->GetPositionZ(),(*itr)->m_loggedInPlayer, range))
+-				{
+-					_AddTargetForced((*itr)->m_loggedInPlayer->GetGUID(), i);
+-					if(!--jumps)
+-					{
+-						p_caster->GetGroup()->Unlock();
+-						return;
+-					}
+-				}
+-			}
+-			p_caster->GetGroup()->Unlock();
+-		}
+-	}//find nearby friendly target
+-	else
+-	{
+-		uint32 placeholder = 0;
+-		vector<Object*> ChainTargetContainer;
+-		unordered_set<Object* >::iterator itr;
+-		for( itr = firstTarget->GetInRangeSetBegin(); itr != firstTarget->GetInRangeSetEnd(); itr++ )
+-		{
+-			if( !(*itr)->IsUnit() || !TO_UNIT(*itr)->isAlive())
++			if(!(*itr)->IsPlayer())
+ 				continue;
+ 
+-			if(IsInrange(firstTarget->GetPositionX(),firstTarget->GetPositionY(),firstTarget->GetPositionZ(),*itr, range))
+-			{
+-				if(!isAttackable(u_caster,TO_UNIT(*itr)) && (*itr)->GetUInt32Value(UNIT_FIELD_HEALTH) != (*itr)->GetUInt32Value(UNIT_FIELD_MAXHEALTH))
+-				{
+-					ChainTargetContainer.push_back(*itr);
+-					++placeholder;
+-				}
+-			}
++			if(!pfirstTargetFrom->IsGroupMember(TO_PLAYER(*itr)))
++				continue;
+ 		}
+ 
+-		Object *chaintarget = NULL;
+-		while(jumps && ChainTargetContainer.size())
+-		{
+-			placeholder = (rand()%ChainTargetContainer.size());
+-			chaintarget = ChainTargetContainer.at(placeholder);
+-			if(chaintarget == NULL)
+-				continue;
++		//healing spell, full health target = NONO
++		if(IsHealingSpell(m_spellInfo) && TO_UNIT(*itr)->GetHealthPct() == 100)
++			continue;
+ 
+-			_AddTarget(TO_UNIT(chaintarget), i);
+-			ChainTargetContainer.erase(ChainTargetContainer.begin()+placeholder);
+-			jumps--;
++		size_t oldsize;
++		if(IsInrange(firstTarget->GetPositionX(), firstTarget->GetPositionY(), firstTarget->GetPositionZ(), (*itr), range))
++		{
++			oldsize = m_targetList.size();
++			AddTarget(i, TargetType, (*itr));
++			if(m_targetList.size() == oldsize || m_targetList.size() >= jumps) //either out of jumps or a resist
++				return;
+ 		}
+-		ChainTargetContainer.clear();
+ 	}
+ }
+ 
+-/// Spell target handling for commonly used simple target add's
+-/// mostly used in scripted and kinda unknown target
+-
+-/// This handler is used in
+-/// Spell Target Handling for type 46: Unknown Summon Atal'ai Skeleton
+-/// Spell Target Handling for type 47: Portal (Not sure, fix me.)
+-/// Spell Target Handling for type 48: fix me
+-/// Spell Target Handling for type 49: fix me
+-/// Spell Target Handling for type 50: fix me
+-/// Spell Target Handling for type 52: Lightwells, etc (Need more research)
+-
+-void Spell::SpellTargetSimpleTargetAdd(uint32 i, uint32 j)
++void Spell::AddConeTargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets)
+ {
+-	_AddTargetForced(m_caster->GetGUID(), i);
+-}
+-
+-void Spell::SpellTargetGameObjectsInByCasterPos(uint32 i, uint32 j)
+-{
+-	if(m_caster == NULL)
+-		return;
+-
+-	FillAllGameObjectTargetsInArea(i, m_caster->GetPositionX(), m_caster->GetPositionY(), m_caster->GetPositionZ(), GetRadius(i));
+-}
+-
+-void Spell::SpellTargetGameObjectsInArea(uint32 i, uint32 j)
+-{
+-	if(m_caster == NULL)
+-		return;
+-
+-	FillAllGameObjectTargetsInArea(i, m_targets.m_destX, m_targets.m_destY, m_targets.m_destZ, GetRadius(i));
+-}
+-
+-/// Spell Target Handling for type 53: Target Area by Players CurrentSelection()
+-void Spell::SpellTargetTargetAreaSelectedUnit(uint32 i, uint32 j)
+-{
+-	Unit* Target = NULLUNIT;
+-	if(m_caster->IsInWorld())
++	ObjectSet::iterator itr;
++	for(itr = m_caster->GetInRangeSetBegin(); itr != m_caster->GetInRangeSetEnd(); itr++)
+ 	{
+-		if(p_caster)
+-			Target = m_caster->GetMapMgr()->GetUnit(p_caster->GetSelection());
+-		else
+-			Target = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-	}
+-
+-	if(!Target)
+-		return;
+-
+-	FillAllTargetsInArea((LocationVector&)Target->GetPosition(), i);
+-}
+-
+-/// Spell Target Handling for type 54: Targets in Front of the Caster
+-void Spell::SpellTargetInFrontOfCaster2(uint32 i, uint32 j)
+-{
+-	unordered_set<Object* >::iterator itr;
+-
+-	for( itr = m_caster->GetInRangeSetBegin(); itr != m_caster->GetInRangeSetEnd(); itr++ )
+-	{
+-		if(!((*itr)->IsUnit()) || !TO_UNIT(*itr)->isAlive())
++		if(!((*itr)->IsUnit()) || !TO_UNIT((*itr))->isAlive())
+ 			continue;
++
+ 		//is Creature in range
+-		if(m_caster->isInRange(TO_UNIT(*itr),GetRadius(i)))
++		if(m_caster->isInRange(TO_UNIT(*itr), GetRadius(i)))
+ 		{
+-			if(m_caster->isTargetInFront(TO_UNIT(*itr)))
++			if(m_spellInfo->cone_width ? m_caster->isInArc(TO_UNIT(*itr), m_spellInfo->cone_width) : m_caster->isTargetInFront(TO_UNIT(*itr)))  // !!! is the target within our cone ?
+ 			{
+-				if(isAttackable(u_caster, TO_UNIT(*itr)))
+-					_AddTarget(TO_UNIT(*itr), i);
++				AddTarget(i, TargetType, (*itr));
+ 			}
+ 		}
++		if(maxtargets != 0 && m_targetList.size() >= maxtargets)
++			return;
+ 	}
+ }
+ 
+-/// Spell Target Handling for type 56: your party or raid within radius
+-void Spell::SpellTarget56(uint32 i, uint32 j)
++void Spell::AddScriptedOrSpellFocusTargets(uint32 i, uint32 TargetType, float r, uint32 maxtargets)
+ {
+-	SpellTargetAllPartyMembersRangeNR(i, j);
+-	/*if(!m_caster->IsInWorld())
+-		return;
++	for(ObjectSet::iterator itr = m_caster->GetInRangeSetBegin(); itr != m_caster->GetInRangeSetEnd(); ++itr)
++	{
++		Object* o = *itr;
+ 
+-	_AddTargetForced(m_caster->GetGUID(), i);*/
+-}
++		if(!o->IsGameObject())
++			continue;
+ 
+-/// Spell Target Handling for type 57: Targeted Party Member
+-void Spell::SpellTargetTargetPartyMember(uint32 i, uint32 j)
+-{
+-	if(!m_caster->IsInWorld())
+-		return;
++		GameObject* go = TO_GAMEOBJECT(o);
+ 
+-	Unit* Target = m_caster->GetMapMgr()->GetPlayer ((uint32)m_targets.m_unitTarget);
+-	if(!Target)
+-		Target = u_caster;
+-	if(!Target)
+-		return;
+-
+-	float r=GetFriendlyMaxRange(dbcSpellRange.LookupEntry(GetSpellProto()->rangeIndex));
+-	if(IsInrange(m_caster->GetPositionX(),m_caster->GetPositionY(),m_caster->GetPositionZ(),Target,r*r))
+-		_AddTargetForced(Target->GetGUID(), i);
+-}
+-
+-/// Spell Target Handling for type 61: targets with the same group/raid and the same class
+-void Spell::SpellTargetSameGroupSameClass(uint32 i, uint32 j)
+-{
+-	if(!m_caster->IsInWorld())
+-		return;
+-
+-	if( m_caster->IsPlayer() )
+-		if( !TO_PLAYER(m_caster)->GetGroup() )
+-			_AddTargetForced(m_caster->GetGUID(), i);
+-
+-	Player* Target = m_caster->GetMapMgr()->GetPlayer((uint32)m_targets.m_unitTarget);
+-	if(!Target)
+-		return;
+-
+-	if( m_caster->IsPlayer() && Target->IsPlayer() && Target->GetGroup() && (Target == m_caster || Target->GetGroup()->HasMember(TO_PLAYER(m_caster))) )
+-	{
+-		Target->GetGroup()->Lock();
+-
+-		for( uint32 x = 0; x < Target->GetGroup()->GetSubGroupCount(); ++x )
++		if(go->GetInfo()->TypeSpellFocus.FocusId == m_spellInfo->RequiresSpellFocus)
+ 		{
+-			for(GroupMembersSet::iterator itr = Target->GetGroup()->GetSubGroup( x )->GetGroupMembersBegin(); itr != Target->GetGroup()->GetSubGroup( x )->GetGroupMembersEnd(); itr++)
+-			{
+-				if(!(*itr)->m_loggedInPlayer || Target->getClass() != (*itr)->m_loggedInPlayer->getClass())
+-					continue;
++			if(!m_caster->isInRange(go, r))
++				continue;
+ 
+-				_AddTargetForced((*itr)->m_loggedInPlayer->GetGUID(), i);
+-			}
++			bool success = AddTarget(i, TargetType, go);
++			if(success)
++				return;
+ 		}
+-		Target->GetGroup()->Unlock();
+ 	}
+ }
+ 
+-
+ // returns Guid of lowest percentage health friendly party or raid target within sqrt('dist') yards
+ uint64 Spell::FindLowestHealthRaidMember(Player* Target, uint32 dist)
+ {
+@@ -1016,210 +470,3 @@
+ 	return lowestHealthTarget;
+ }
+ 
+-/// Spell Target Handling for type 76 All targets in area
+-void Spell::SpellTargetAllTargetsInArea(uint32 i, uint32 j)
+-{
+-	if( !m_caster || !m_caster->IsInWorld() )
+-		return;
+-
+-	FillAllTargetsInArea(i, m_targets.m_destX, m_targets.m_destY, m_targets.m_destZ, GetRadius(i));
+-}
+-
+-/// Spell Target Handling for type 87
+-void Spell::SpellTargetAreaOfEffect87(uint32 i, uint32 j)
+-{
+-	if( !m_caster || !m_caster->IsInWorld() )
+-		return;
+-
+-	FillAllGameObjectTargetsInArea(i, m_targets.m_destX, m_targets.m_destY, m_targets.m_destZ, GetRadius(i));
+-}
+-
+-/// Spell Target Handling for type 89
+-void Spell::SpellTargetProjectile(uint32 i, uint32 j)
+-{
+-	if( !m_caster || !m_caster->IsInWorld() )
+-		return;
+-
+-	FillAllTargetsInArea(i, m_targets.m_destX, m_targets.m_destY, m_targets.m_destZ, GetRadius(i));
+-}
+-
+-/// Spell Target Handling for type 94: Target: Vehicle
+-void Spell::SpellTargetVehicle(uint32 i, uint32 j)
+-{
+-	if(p_caster)
+-	{
+-		if( p_caster->GetVehicle() != NULL )
+-			_AddTargetForced( p_caster->GetVehicle()->GetGUID(), i );
+-	}
+-}
+-
+-void Spell::SpellTargetVehicleDriver(uint32 i, uint32 j)
+-{
+-	if(!v_caster)
+-		return;
+-	if(v_caster->GetControllingUnit())
+-		_AddTargetForced(v_caster->GetControllingUnit(), i );
+-}
+-
+-void Spell::SpellTargetVehiclePassenger(uint32 i, uint32 j)
+-{
+-	if(!v_caster)
+-		return;
+-
+-	if(v_caster->GetPassenger(0))
+-		_AddTargetForced(v_caster->GetPassenger(0), i );
+-}
+-
+-void Spell::SpellTargetVehiclePassenger1(uint32 i, uint32 j)
+-{
+-	if(v_caster)
+-	{
+-		if(v_caster->GetPassenger(1))
+-			_AddTargetForced(v_caster->GetPassenger(1), i );
+-		return;
+-	}
+-	Unit* target = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-	if(!target)
+-		return;
+-	if(target->IsVehicle())
+-	{
+-		if(TO_VEHICLE(target)->GetPassenger(1))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(1), i );
+-		return;
+-	}
+-	if(target->GetVehicle(true))
+-		if(TO_VEHICLE(target->GetVehicle(true))->GetPassenger(1))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(1), i );
+-}
+-
+-void Spell::SpellTargetVehiclePassenger2(uint32 i, uint32 j)
+-{
+-	if(v_caster)
+-	{
+-		if(v_caster->GetPassenger(2))
+-			_AddTargetForced(v_caster->GetPassenger(2), i );
+-		return;
+-	}
+-	Unit* target = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-	if(!target)
+-		return;
+-	if(target->IsVehicle())
+-	{
+-		if(TO_VEHICLE(target)->GetPassenger(2))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(2), i );
+-		return;
+-	}
+-	if(target->GetVehicle(true))
+-		if(TO_VEHICLE(target->GetVehicle(true))->GetPassenger(2))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(2), i );
+-}
+-
+-void Spell::SpellTargetVehiclePassenger3(uint32 i, uint32 j)
+-{
+-	if(v_caster)
+-	{
+-		if(v_caster->GetPassenger(3))
+-			_AddTargetForced(v_caster->GetPassenger(3), i );
+-		return;
+-	}
+-	Unit* target = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-	if(!target)
+-		return;
+-	if(target->IsVehicle())
+-	{
+-		if(TO_VEHICLE(target)->GetPassenger(3))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(3), i );
+-		return;
+-	}
+-	if(target->GetVehicle(true))
+-		if(TO_VEHICLE(target->GetVehicle(true))->GetPassenger(3))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(3), i );
+-}
+-
+-void Spell::SpellTargetVehiclePassenger4(uint32 i, uint32 j)
+-{
+-	if(v_caster)
+-	{
+-		if(v_caster->GetPassenger(4))
+-			_AddTargetForced(v_caster->GetPassenger(4), i );
+-		return;
+-	}
+-	Unit* target = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-	if(!target)
+-		return;
+-	if(target->IsVehicle())
+-	{
+-		if(TO_VEHICLE(target)->GetPassenger(4))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(4), i );
+-		return;
+-	}
+-	if(target->GetVehicle(true))
+-		if(TO_VEHICLE(target->GetVehicle(true))->GetPassenger(4))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(4), i );
+-}
+-
+-void Spell::SpellTargetVehiclePassenger5(uint32 i, uint32 j)
+-{
+-	if(v_caster)
+-	{
+-		if(v_caster->GetPassenger(5))
+-			_AddTargetForced(v_caster->GetPassenger(5), i );
+-		return;
+-	}
+-	Unit* target = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-	if(!target)
+-		return;
+-	if(target->IsVehicle())
+-	{
+-		if(TO_VEHICLE(target)->GetPassenger(5))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(5), i );
+-		return;
+-	}
+-	if(target->GetVehicle(true))
+-		if(TO_VEHICLE(target->GetVehicle(true))->GetPassenger(5))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(5), i );
+-}
+-
+-void Spell::SpellTargetVehiclePassenger6(uint32 i, uint32 j)
+-{
+-	if(v_caster)
+-	{
+-		if(v_caster->GetPassenger(6))
+-			_AddTargetForced(v_caster->GetPassenger(6), i );
+-		return;
+-	}
+-	Unit* target = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-	if(!target)
+-		return;
+-	if(target->IsVehicle())
+-	{
+-		if(TO_VEHICLE(target)->GetPassenger(6))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(6), i );
+-		return;
+-	}
+-	if(target->GetVehicle(true))
+-		if(TO_VEHICLE(target->GetVehicle(true))->GetPassenger(6))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(6), i );
+-}
+-
+-void Spell::SpellTargetVehiclePassenger7(uint32 i, uint32 j)
+-{
+-	if(v_caster)
+-	{
+-		if(v_caster->GetPassenger(7))
+-			_AddTargetForced(v_caster->GetPassenger(7), i );
+-		return;
+-	}
+-	Unit* target = m_caster->GetMapMgr()->GetUnit(m_targets.m_unitTarget);
+-	if(!target)
+-		return;
+-	if(target->IsVehicle())
+-	{
+-		if(TO_VEHICLE(target)->GetPassenger(7))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(7), i );
+-		return;
+-	}
+-	if(target->GetVehicle(true))
+-		if(TO_VEHICLE(target->GetVehicle(true))->GetPassenger(7))
+-			_AddTargetForced(TO_VEHICLE(target)->GetPassenger(7), i );
+-}

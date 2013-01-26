@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{EE39B48B-C598-4AAF-9EF0-199402933EE5}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\bin\debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">debug_lacrimi_scripts\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\..\..\bin\debug_x64\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug_lacrimi_scripts_x64\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\bin\release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">release_lacrimi_scripts\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\..\..\bin\release_x64\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release_lacrimi_scripts_x64\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm500 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\Source;..\..\Source\PrecompiledHeaders;..\..\..\hearthstone-shared;..\..\..\hearthstone-world;..\..\..\..\dependencies\VC\include\lualib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SCRIPTLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LacrimiStdAfx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>hearthstone-world.lib;lualib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../../../../bin/debug/Lacrimi.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\bin\debug;..\..\..\..\dependencies\VC\libVC100;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>../../../../bin/debug/Lacrimi.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(OutDir)Lacrimi.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm500 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\Source;..\..\Source\PrecompiledHeaders;..\..\..\hearthstone-shared;..\..\..\hearthstone-world;..\..\..\..\dependencies\VC\include\lualib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;SCRIPTLIB;X64;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LacrimiStdAfx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>hearthstone-world.lib;lualib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../../../../bin/debug_x64/Lacrimi.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\bin\debug_x64;..\..\..\..\dependencies\VC\libVC100\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>../../../../bin/debug_x64/Lacrimi.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(OutDir)Lacrimi.lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm500 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\Source;..\..\Source\PrecompiledHeaders;..\..\..\hearthstone-shared;..\..\..\hearthstone-world;..\..\..\..\dependencies\VC\include\lualib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SCRIPTLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LacrimiStdAfx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ForcedIncludeFiles>%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>hearthstone-world.lib;lualib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../../../../bin/release/Lacrimi.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\bin\release;..\..\..\..\dependencies\VC\libVC100;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>../../../../bin/release/Lacrimi.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LinkTimeCodeGeneration>
+      </LinkTimeCodeGeneration>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(OutDir)Lacrimi.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm500 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>..\..\Source;..\..\Source\PrecompiledHeaders;..\..\..\hearthstone-shared;..\..\..\hearthstone-world;..\..\..\..\dependencies\VC\include\lualib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SCRIPTLIB;X64;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>LacrimiStdAfx.h</PrecompiledHeaderFile>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>hearthstone-world.lib;lualib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>../../../../bin/release_x64/Lacrimi.dll</OutputFile>
+      <AdditionalLibraryDirectories>..\..\..\..\bin\release_x64;..\..\..\..\dependencies\VC\libVC100\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>../../../../bin/release_x64/Lacrimi.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImportLibrary>$(OutDir)Lacrimi.lib</ImportLibrary>
+      <TargetMachine>MachineX64</TargetMachine>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\LuaHandler\Functions\FunctionAura.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\Functions\FunctionGameObjects.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\Functions\FunctionGlobal.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\Functions\FunctionItems.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\Functions\FunctionPacket.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\Functions\FunctionSpell.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\Functions\FunctionTaxi.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\Functions\FunctionUnits.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\Functions\LuaSqlApi.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\Functions\TableFunctions.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\LUAEngineMgr.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\LUAEventMgr.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\LUAGUIDMgr.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\LUAObjects.cpp" />
+    <ClCompile Include="..\..\Source\PrecompiledHeaders\LacrimiStdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Dependencies\Base.cpp" />
+    <ClCompile Include="..\..\Source\Dependencies\Functions.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Alterac_Mountains.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Arathi_Highlands.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Blasted_Lands.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Burning_Steppes.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Cities\Ironforge.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Cities\Silvermoon.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Cities\Stormwind.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Cities\Undercity.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Dun_Morogh.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Duskwood.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Eastern_Plaguelands.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Elwynn_Forest.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Eversong_Woods.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Ghostlands.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Hinterlands.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Isle_Of_Quel__Danas.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Loch_Modan.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Searing_Gorge.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Silverpine_Forest.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Stranglethorn_Vale.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Trisfal_Glades.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Western_Plaguelands.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Westfall.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Eastern Kingdoms\Wetlands.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Ebon Hold\Ebon_Hold.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Ebon Hold\PhaseOne.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Ebon Hold\PhaseThree.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Ebon Hold\PhaseTwo.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Ashenvale.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Azshara.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Azuremyst_Isle.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Bloodmyst_Isle.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Cities\Darnassus.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Cities\Exodar.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Cities\Orgrimmar.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Cities\Thunderbluff.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Darkshore.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Desolace.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Dustwallow_Marsh.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Felwood.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Feralas.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Moonglade.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Mulgore.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Silithus.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Stonetalon_Mountains.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Tanaris.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Teldrassil.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\The_Barrens.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Thousand_Needles.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Ungoro_Crater.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Kalimdor\Winterspring.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Northrend\Borean_Tundra.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Northrend\Cities\Dalaran.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Northrend\Dragonblight.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Northrend\Grizzly_Hills.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Northrend\Howling_Fjord.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Northrend\Icecrown.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Northrend\Sholazar_Basin.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Northrend\Storm_Peaks.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Northrend\Zul_Drak.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Outlands\Blades_Edge_Mountains.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Outlands\Cities\Shattrath.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Outlands\Hellfire_Peninsula.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Outlands\Nagrand.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Outlands\Netherstorm.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Outlands\Shadowmoon_Valley.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Outlands\Terrokar_Forest.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 0\Outlands\Zangarmarsh.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Level 2\Blackfathom Deeps\Blackfathom_Deeps.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Deathknight.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Druid.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Hunter.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Mage.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Misc.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Paladin.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Priest.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Rogue.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Shaman.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Warlock.cpp" />
+    <ClCompile Include="..\..\Source\Scripts\Spellscripts\Warrior.cpp" />
+    <ClCompile Include="..\..\Source\Setup\Setup.cpp" />
+    <ClCompile Include="..\..\Source\LuaHandler\LUAEngine.cpp" />
+    <ClCompile Include="..\..\Source\Lacrimi.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\LuaHandler\Functions\FunctionAura.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\Functions\FunctionGameObjects.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\Functions\FunctionGlobal.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\Functions\FunctionItems.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\Functions\FunctionPacket.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\Functions\FunctionSpell.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\Functions\FunctionTaxi.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\Functions\FunctionUnits.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\Functions\LuaSqlApi.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\Functions\TableFunctions.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\LUADefines.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\LUAEngineMgr.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\LUAEventMgr.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\LUAGUIDMgr.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\LUALunar.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\LUAObjects.h" />
+    <ClInclude Include="..\..\Source\PrecompiledHeaders\LacrimiStdAfx.h" />
+    <ClInclude Include="..\..\Source\Dependencies\Base.h" />
+    <ClInclude Include="..\..\Source\Dependencies\Functions.h" />
+    <ClInclude Include="..\..\Source\Scripts\Defines.h" />
+    <ClInclude Include="..\..\Source\Scripts\Level 0\Ebon Hold\Ebon_Hold.h" />
+    <ClInclude Include="..\..\Source\Scripts\Level 2\Blackfathom Deeps\Blackfathom_Deeps.h" />
+    <ClInclude Include="..\..\Source\Scripts\ScriptHeaders.h" />
+    <ClInclude Include="..\..\Source\Setup\Setup.h" />
+    <ClInclude Include="..\..\Source\LuaHandler\LUAEngine.h" />
+    <ClInclude Include="..\..\Source\Lacrimi.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\win\VC110\hearthstone-world.vcxproj">
+      <Project>{1DC6C4DA-A028-41F3-877D-D5400C594F88}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

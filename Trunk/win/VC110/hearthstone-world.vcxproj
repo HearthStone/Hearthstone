@@ -1,0 +1,544 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1DC6C4DA-A028-41F3-877D-D5400C594F88}</ProjectGuid>
+    <RootNamespace>game</RootNamespace>
+    <VCTargetsPath Condition="'$(VCTargetsPath11)' != '' and '$(VSVersion)' == '' and $(VisualStudioVersion) == ''">$(VCTargetsPath11)</VCTargetsPath>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\..\..\bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\hearthstone-world___Win32_Debug\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\..\..\bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\hearthstone-world___Win32_Release\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\..\..\bin\Debug_x64\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\hearthstone-world___x64_Debug\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\..\..\bin\Release_x64\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\hearthstone-world___x64_Release\</IntDir>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm500 /MP5 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\src\hearthstone-shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>$(IntDir)hearthstone-world.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <BrowseInformation>
+      </BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRT /LTCG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>ws2_32.lib;libmysql.lib;libeay32.lib;dbghelp.lib;zlib.lib;pcre.lib;Mswsock.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\dependencies\VC\libVC110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <LargeAddressAware>true</LargeAddressAware>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions>/Zm500 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\src\hearthstone-shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_HAS_ITERATOR_DEBUGGING=0;WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>$(IntDir)hearthstone-world.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;libmysql.lib;libeay32.lib;dbghelp.lib;zlib.lib;pcre.lib;Mswsock.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\dependencies\VC\libVC110;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <LargeAddressAware>true</LargeAddressAware>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm500 /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\src\hearthstone-shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <BrowseInformation>
+      </BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <StringPooling>true</StringPooling>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;libmysql.lib;libeay32.lib;dbghelp.lib;zlib.lib;pcre.lib;Mswsock.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\dependencies\VC\libVC110\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRT /NODEFAULTLIB:LIBCMTD %(AdditionalOptions)</AdditionalOptions>
+      <LargeAddressAware>true</LargeAddressAware>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <TargetEnvironment>X64</TargetEnvironment>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm500 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>..\..\src\hearthstone-shared;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_HAS_ITERATOR_DEBUGGING=0;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE;_WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderOutputFile>$(IntDir)game.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>ws2_32.lib;libmysql.lib;libeay32.lib;dbghelp.lib;zlib.lib;pcre.lib;Mswsock.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\dependencies\VC\libVC110\amd64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <LargeAddressAware>true</LargeAddressAware>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\hearthstone-shared\CoreMemoryAllocator_Core.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AICombat.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AIEvent.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AIInterface.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AIMovement.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AISpellCasting.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AIWaypoints.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AuraInterface.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ConsoleListener.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\DatabaseCommands.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\GuildManager.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\GuildManagerFunctions.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\IsleOfConquest.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Main.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\MapManagerScript.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Master.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ConsoleCommands.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AlteracValley.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ArathiBasin.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Arenas.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ArenaTeam.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\BattlegroundCommands.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\BattlegroundHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\BattlegroundMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\EyeOfTheStorm.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\NavMeshInterface.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\SkillNameMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Spellfixes\SingleCoefFixes.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Spellfixes\SingleSpellFixes.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Spellfixes\SpellFixes.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\StrandOfTheAncients.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Summons.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Tracker.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WarnSystem.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WarnSystem_Punishments.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WarsongGulch.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Container.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Corpse.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Creature.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\DynamicObject.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\EventableObject.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\GameObject.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Item.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Object.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Pet.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Player.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Unit.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Vehicle.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Channel.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ChannelHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Chat.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ChatHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\debugcmds.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\GMTicketCommands.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Level0.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Level1.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Level2.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Level3.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\QuestCommands.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\RecallCommands.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Wintergrasp.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WintergraspInternal.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WordFilter.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\LogonCommClient.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\LogonCommHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\VoiceChatClientSocket.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Map.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\MapCell.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\MapMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\World.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WorldCreator.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WorldRunnable.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WorldStateManager.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AreaTrigger.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\CollideInterface.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\TerrainMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WeatherMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\CharacterHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\CombatHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\DuelHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\GroupHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\GuildHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\HonorHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ItemHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\LfgHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\MiscHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\MovementHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\NPCHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\PetHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\PlayerPacketWrapper.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\QueryHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\QuestHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\RaidHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ReputationHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\SkillHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\SocialHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\TaxiHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\TradeHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\TransporterHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\VoiceChatHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WorldSession.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Spell.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\SpellAuras.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\SpellEffects.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\SpellHandler.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\SpellTarget.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AchievementInterface.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AddonMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AuctionHouse.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\AuctionMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\DayWatcherThread.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\GMTicket.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Group.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ItemInterface.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\LfgMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\LootMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\MailSystem.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Quest.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\QuestMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\TaxiMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ScriptMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WayPoints.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Opcodes.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\WorldSocket.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\EventMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\faction.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ObjectMgr.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\ObjectStorage.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\Stats.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\hearthstone-world\AI\AIInterface.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\AI\AIMovement.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\AI\AI_Defines.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\AI\AI_Headers.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\AuraInterface.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\CallScripting.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\GuildDefines.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\GuildManager.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\IsleOfConquest.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\MapManagerScript.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Master.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ConsoleCommands.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\AlteracValley.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ArathiBasin.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Arenas.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ArenaTeam.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\BattlegroundMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\EyeOfTheStorm.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\NavMeshInterface.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\SpellDefines.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\StrandOfTheAncients.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Summons.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Tracker.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WarnSystem.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WarsongGulch.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Container.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Corpse.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Creature.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\DynamicObject.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\EventableObject.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\GameObject.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Item.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Object.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Pet.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Player.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Unit.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Vehicle.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Channel.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ChannelMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Chat.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Wintergrasp.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WintergraspInternal.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WordFilter.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\LogonCommClient.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\LogonCommHandler.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\VoiceChatClientSocket.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\CellHandler.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Map.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\MapCell.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\MapMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\World.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WorldCreator.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WorldRunnable.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WorldStateManager.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WorldStates.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\AreaTrigger.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\CollideInterface.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\TerrainMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WeatherMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\HonorHandler.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\NPCHandler.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Packets.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\TransporterHandler.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\VoiceChatHandler.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WorldSession.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ClassSpells.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Spell.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\SpellAuras.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\SpellNameHashes.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\AchievementInterface.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\AddonMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\AuctionHouse.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\AuctionMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\DayWatcherThread.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Group.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ItemInterface.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ItemPrototype.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\LfgMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\LootMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\MailSystem.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Quest.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\QuestMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Skill.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\SkillNameMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\TaxiMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ScriptMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ScriptSetup.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\NameTables.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Opcodes.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\WorldSocket.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Const.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\EventMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\faction.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\MiscHandler.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ObjectMgr.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\ObjectStorage.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\Stats.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\StdAfx.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\UpdateFields.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\UpdateMask.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="hearthstone-shared.vcxproj">
+      <Project>{90297c34-f231-4df4-848e-a74bcc0e40ed}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\src\hearthstone-world\resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\hearthstone-world\Icon.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

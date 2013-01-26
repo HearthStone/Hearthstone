@@ -1,0 +1,792 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\src\hearthstone-world\StdAfx.cpp" />
+    <ClCompile Include="..\..\src\hearthstone-world\DynamicObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\EventableObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\GameObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Object.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Spell.cpp">
+      <Filter>Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\SpellTarget.cpp">
+      <Filter>Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\SpellEffects.cpp">
+      <Filter>Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\SpellHandler.cpp">
+      <Filter>Spell</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\SpellAuras.cpp">
+      <Filter>Objects\Auras</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Container.cpp">
+      <Filter>Objects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Item.cpp">
+      <Filter>Objects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Corpse.cpp">
+      <Filter>Objects\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Creature.cpp">
+      <Filter>Objects\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Pet.cpp">
+      <Filter>Objects\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Player.cpp">
+      <Filter>Objects\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Unit.cpp">
+      <Filter>Objects\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Vehicle.cpp">
+      <Filter>Objects\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Wintergrasp.cpp">
+      <Filter>Battlegrounds\Wintergrasp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WintergraspInternal.cpp">
+      <Filter>Battlegrounds\Wintergrasp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AlteracValley.cpp">
+      <Filter>Battlegrounds\1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ArathiBasin.cpp">
+      <Filter>Battlegrounds\1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WarsongGulch.cpp">
+      <Filter>Battlegrounds\1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\EyeOfTheStorm.cpp">
+      <Filter>Battlegrounds\2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\IsleOfConquest.cpp">
+      <Filter>Battlegrounds\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\StrandOfTheAncients.cpp">
+      <Filter>Battlegrounds\3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Arenas.cpp">
+      <Filter>Battlegrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ArenaTeam.cpp">
+      <Filter>Battlegrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\BattlegroundCommands.cpp">
+      <Filter>Battlegrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\BattlegroundHandler.cpp">
+      <Filter>Battlegrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\BattlegroundMgr.cpp">
+      <Filter>Battlegrounds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\faction.cpp">
+      <Filter>Brains</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ScriptMgr.cpp">
+      <Filter>Brains</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ChatHandler.cpp">
+      <Filter>Client Communication\Chat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Chat.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\DatabaseCommands.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\debugcmds.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\GMTicketCommands.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Level0.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Level1.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Level2.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Level3.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\RecallCommands.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\QuestCommands.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Channel.cpp">
+      <Filter>Client Communication\Chat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ChannelHandler.cpp">
+      <Filter>Client Communication\Chat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WordFilter.cpp">
+      <Filter>Client Communication\Chat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Opcodes.cpp">
+      <Filter>Client Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WorldSession.cpp">
+      <Filter>Client Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WorldSocket.cpp">
+      <Filter>Client Communication</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AreaTrigger.cpp">
+      <Filter>Map System\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WeatherMgr.cpp">
+      <Filter>Map System\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WorldStateManager.cpp">
+      <Filter>Map System\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\LogonCommClient.cpp">
+      <Filter>Interserver\Logon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\LogonCommHandler.cpp">
+      <Filter>Interserver\Logon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\VoiceChatClientSocket.cpp">
+      <Filter>Interserver\Voice Chat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ConsoleCommands.cpp">
+      <Filter>Launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ConsoleListener.cpp">
+      <Filter>Launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-shared\CoreMemoryAllocator_Core.cpp">
+      <Filter>Launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Main.cpp">
+      <Filter>Launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Master.cpp">
+      <Filter>Launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WorldRunnable.cpp">
+      <Filter>Map System</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Map.cpp">
+      <Filter>Map System\Map Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\MapCell.cpp">
+      <Filter>Map System\Map Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\MapMgr.cpp">
+      <Filter>Map System\Map Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WorldCreator.cpp">
+      <Filter>Map System\Map Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\CharacterHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\CombatHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\DuelHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\GroupHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\GuildHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\HonorHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ItemHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\LfgHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\MiscHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\MovementHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\NPCHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\PetHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\PlayerPacketWrapper.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\QueryHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\QuestHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\RaidHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ReputationHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\SkillHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\SocialHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\TaxiHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\TradeHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\TransporterHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\VoiceChatHandler.cpp">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AchievementInterface.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WarnSystem_Punishments.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AuctionHouse.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\GMTicket.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Group.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ItemInterface.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\MailSystem.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Quest.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Stats.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Tracker.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WarnSystem.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Spellfixes\SingleSpellFixes.cpp">
+      <Filter>Spell\Spell Fixes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Spellfixes\SpellFixes.cpp">
+      <Filter>Spell\Spell Fixes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\World.cpp">
+      <Filter>Launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\TerrainMgr.cpp">
+      <Filter>Map System\Map Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\CollideInterface.cpp">
+      <Filter>Map System\Map Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\NavMeshInterface.cpp">
+      <Filter>Map System\Map Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Spellfixes\SingleCoefFixes.cpp">
+      <Filter>Spell\Spell Fixes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\WayPoints.cpp">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\GuildManager.cpp">
+      <Filter>Interserver\Management\Guild Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\GuildManagerFunctions.cpp">
+      <Filter>Interserver\Management\Guild Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\DayWatcherThread.cpp">
+      <Filter>Interserver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\Summons.cpp">
+      <Filter>Objects\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\EventMgr.cpp">
+      <Filter>Interserver\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\LfgMgr.cpp">
+      <Filter>Interserver\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\LootMgr.cpp">
+      <Filter>Interserver\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\QuestMgr.cpp">
+      <Filter>Interserver\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ObjectStorage.cpp">
+      <Filter>Interserver</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AuctionMgr.cpp">
+      <Filter>Interserver\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AddonMgr.cpp">
+      <Filter>Interserver\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\TaxiMgr.cpp">
+      <Filter>Interserver\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\SkillNameMgr.cpp">
+      <Filter>Interserver\Management</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AuraInterface.cpp">
+      <Filter>Player Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\MapManagerScript.cpp">
+      <Filter>Map System\Map Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\ObjectMgr.cpp">
+      <Filter>Launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AIInterface.cpp">
+      <Filter>AI\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AICombat.cpp">
+      <Filter>AI\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AIEvent.cpp">
+      <Filter>AI\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AIMovement.cpp">
+      <Filter>AI\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AISpellCasting.cpp">
+      <Filter>AI\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\hearthstone-world\AI\AIWaypoints.cpp">
+      <Filter>AI\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\hearthstone-world\Const.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\StdAfx.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\UpdateFields.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\UpdateMask.h" />
+    <ClInclude Include="..\..\src\hearthstone-world\DynamicObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\EventableObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\GameObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Object.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Spell.h">
+      <Filter>Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\SpellNameHashes.h">
+      <Filter>Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\SpellAuras.h">
+      <Filter>Objects\Auras</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Container.h">
+      <Filter>Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Item.h">
+      <Filter>Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Corpse.h">
+      <Filter>Objects\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Creature.h">
+      <Filter>Objects\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Pet.h">
+      <Filter>Objects\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Player.h">
+      <Filter>Objects\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Unit.h">
+      <Filter>Objects\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Vehicle.h">
+      <Filter>Objects\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WintergraspInternal.h">
+      <Filter>Battlegrounds\Wintergrasp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Wintergrasp.h">
+      <Filter>Battlegrounds\Wintergrasp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ArathiBasin.h">
+      <Filter>Battlegrounds\1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AlteracValley.h">
+      <Filter>Battlegrounds\1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WarsongGulch.h">
+      <Filter>Battlegrounds\1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\EyeOfTheStorm.h">
+      <Filter>Battlegrounds\2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\IsleOfConquest.h">
+      <Filter>Battlegrounds\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\StrandOfTheAncients.h">
+      <Filter>Battlegrounds\3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ArenaTeam.h">
+      <Filter>Battlegrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Arenas.h">
+      <Filter>Battlegrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\BattlegroundMgr.h">
+      <Filter>Battlegrounds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\faction.h">
+      <Filter>Brains</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ScriptMgr.h">
+      <Filter>Brains</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ScriptSetup.h">
+      <Filter>Brains</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Chat.h">
+      <Filter>Client Communication\Chat\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Channel.h">
+      <Filter>Client Communication\Chat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ChannelMgr.h">
+      <Filter>Client Communication\Chat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WordFilter.h">
+      <Filter>Client Communication\Chat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\NameTables.h">
+      <Filter>Client Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Opcodes.h">
+      <Filter>Client Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WorldSession.h">
+      <Filter>Client Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WorldSocket.h">
+      <Filter>Client Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AreaTrigger.h">
+      <Filter>Map System\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WeatherMgr.h">
+      <Filter>Map System\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WorldStateManager.h">
+      <Filter>Map System\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WorldStates.h">
+      <Filter>Map System\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\LogonCommHandler.h">
+      <Filter>Interserver\Logon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\LogonCommClient.h">
+      <Filter>Interserver\Logon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\VoiceChatClientSocket.h">
+      <Filter>Interserver\Voice Chat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ConsoleCommands.h">
+      <Filter>Launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Master.h">
+      <Filter>Launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WorldRunnable.h">
+      <Filter>Map System</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\CellHandler.h">
+      <Filter>Map System\Map Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Map.h">
+      <Filter>Map System\Map Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\MapCell.h">
+      <Filter>Map System\Map Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\MapMgr.h">
+      <Filter>Map System\Map Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WorldCreator.h">
+      <Filter>Map System\Map Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\HonorHandler.h">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\MiscHandler.h">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\NPCHandler.h">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Packets.h">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\TransporterHandler.h">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\VoiceChatHandler.h">
+      <Filter>Client Communication\Packet Handlers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AchievementInterface.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AuctionHouse.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ClassSpells.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Group.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ItemInterface.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ItemPrototype.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\MailSystem.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Quest.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Skill.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Stats.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Tracker.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\WarnSystem.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\World.h">
+      <Filter>Launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\TerrainMgr.h">
+      <Filter>Map System\Map Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\NavMeshInterface.h">
+      <Filter>Map System\Map Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\CollideInterface.h">
+      <Filter>Map System\Map Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\GuildManager.h">
+      <Filter>Interserver\Management\Guild Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\GuildDefines.h">
+      <Filter>Interserver\Management\Guild Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\DayWatcherThread.h">
+      <Filter>Interserver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\SpellDefines.h">
+      <Filter>Spell</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\Summons.h">
+      <Filter>Objects\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\QuestMgr.h">
+      <Filter>Interserver\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\EventMgr.h">
+      <Filter>Interserver\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\LfgMgr.h">
+      <Filter>Interserver\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\LootMgr.h">
+      <Filter>Interserver\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ObjectStorage.h">
+      <Filter>Interserver</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AuctionMgr.h">
+      <Filter>Interserver\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AddonMgr.h">
+      <Filter>Interserver\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\TaxiMgr.h">
+      <Filter>Interserver\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\SkillNameMgr.h">
+      <Filter>Interserver\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AuraInterface.h">
+      <Filter>Player Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\MapManagerScript.h">
+      <Filter>Map System\Map Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\ObjectMgr.h">
+      <Filter>Launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AI\AIInterface.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\CallScripting.h">
+      <Filter>Brains</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AI\AIMovement.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AI\AI_Headers.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\hearthstone-world\AI\AI_Defines.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Brains">
+      <UniqueIdentifier>{5806c6ad-146e-4023-8c03-e97263022b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spell">
+      <UniqueIdentifier>{abca9c19-0770-4098-824e-78b731b61e07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{5871fd09-df5e-49f2-abc9-26a7caa39817}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client Communication">
+      <UniqueIdentifier>{b297eee7-3e81-4795-b34b-6b65453c6542}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interserver">
+      <UniqueIdentifier>{e15b5c10-62e3-4a97-82f5-482ca59bd3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Launcher">
+      <UniqueIdentifier>{2e8bed5c-d9bf-4abe-957e-9cae7531b695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map System">
+      <UniqueIdentifier>{0cf5e08d-cee1-4036-adc6-0f43527d2abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Auras">
+      <UniqueIdentifier>{15e06b0e-4312-4a7b-b59f-b377cebc4459}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Items">
+      <UniqueIdentifier>{77a4b613-a0aa-4d31-af12-efc2c4761ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Units">
+      <UniqueIdentifier>{1de0b243-8416-4ddf-bfaa-c093c234e506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Battlegrounds">
+      <UniqueIdentifier>{c9b6ebc9-77af-434a-b2a8-b03c6cbba3e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Battlegrounds\1">
+      <UniqueIdentifier>{66c4e940-980e-4c6b-b38d-3e126fa57334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Battlegrounds\2">
+      <UniqueIdentifier>{72c16164-8b2c-43fb-a3b2-7f6ac13a93c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Battlegrounds\3">
+      <UniqueIdentifier>{3d3451d5-0a0a-4901-ab57-d3f088b03d02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Battlegrounds\Wintergrasp">
+      <UniqueIdentifier>{5b34489a-f511-49bd-b347-61005c7f37e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interserver\Logon">
+      <UniqueIdentifier>{4d806c80-5634-4f9f-808e-9d13aa92fe5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interserver\Voice Chat">
+      <UniqueIdentifier>{dc9f46a8-82e2-4696-9342-78077e2aa16f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Launcher\Additions">
+      <UniqueIdentifier>{0a43f92f-b713-4847-9d6a-bd69fde9814b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map System\Map Interface">
+      <UniqueIdentifier>{d25d7562-3764-4c49-ab7d-7b8001904231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map System\Map Managers">
+      <UniqueIdentifier>{c25023a9-a67c-4da8-b2be-7bd33aa3865e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player Systems">
+      <UniqueIdentifier>{150e698d-8c1a-41db-9e6b-529732eba51b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Spell\Spell Fixes">
+      <UniqueIdentifier>{6f7d039f-4c89-408c-b636-a150b1721031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map System\Environment">
+      <UniqueIdentifier>{67a54400-c257-4a1b-a3d4-3023bc4f646e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map System\Map Tiles">
+      <UniqueIdentifier>{3bbf4881-65bd-4db0-bc03-ace66eb76dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interserver\Management">
+      <UniqueIdentifier>{12f066fe-a4f8-4032-9b2f-cd419edcc5fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client Communication\Chat">
+      <UniqueIdentifier>{1d31ab99-5330-40e8-8e5c-ae2422b7c955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client Communication\Chat\Commands">
+      <UniqueIdentifier>{17d6a16a-5263-47b1-9ec1-531f0b9bbceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Client Communication\Packet Handlers">
+      <UniqueIdentifier>{d44cb7fa-3957-4fc4-8889-19d74f102737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Interserver\Management\Guild Manager">
+      <UniqueIdentifier>{df7eacf3-8071-49c7-8f47-dda4aeae60ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{f0a52a4f-7fdc-4b51-9f2a-ef8c130e7765}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI\Source">
+      <UniqueIdentifier>{1ecd5364-9495-4f9c-9dc2-4adb00d934c0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\hearthstone-world\Icon.ico">
+      <Filter>Launcher\Additions</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\src\hearthstone-world\resources.rc">
+      <Filter>Launcher\Additions</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

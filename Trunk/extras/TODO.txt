@@ -1,0 +1,3 @@
+Crow:
+Make a single extractor, first main maps, then vmaps, then grid maps, then mmaps.
+Then maybe make it delete grid maps.

@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\vmap_assembler.cpp" />
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\vmap\BIH.cpp" />
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\vmap\MapTree.cpp" />
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\vmap\ModelInstance.cpp" />
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\vmap\TileAssembler.cpp" />
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\vmap\VMapManager2.cpp" />
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\vmap\WorldModel.cpp" />
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Vector4int8.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Vector4.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Vector3int32.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Vector3int16.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Vector3.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Vector2int16.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Vector2.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\UprightFrame.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\uint128.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Triangle.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\System.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\stringutils.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Sphere.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\RegistryUtil.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\ReferenceCount.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Ray.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Random.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Quat.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Plane.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\MemoryManager.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Matrix4.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Matrix3.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Matrix.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\LineSegment.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Line.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\g3dmath.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\g3dfnmatch.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\fileutils.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Cylinder.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Crypto.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\CoordinateFrame.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\CollisionDetection.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Capsule.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\Box.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\hearthstone-shared\Collision\g3dlite\AABox.cpp">
+      <Filter>G3D</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\hearthstone-shared\Collision\vmap\WorldModel.h" />
+    <ClInclude Include="..\..\..\src\hearthstone-shared\Collision\vmap\BIH.h" />
+    <ClInclude Include="..\..\..\src\hearthstone-shared\Collision\vmap\MapTree.h" />
+    <ClInclude Include="..\..\..\src\hearthstone-shared\Collision\vmap\ModelInstance.h" />
+    <ClInclude Include="..\..\..\src\hearthstone-shared\Collision\vmap\TileAssembler.h" />
+    <ClInclude Include="..\..\..\src\hearthstone-shared\Collision\vmap\VMapManager2.h" />
+    <ClInclude Include="..\..\..\src\hearthstone-shared\Collision\vmap\VMapTools.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="G3D">
+      <UniqueIdentifier>{2f152099-6809-427e-b8df-eab495193cb1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
